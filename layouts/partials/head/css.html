@@ -7,3 +7,9 @@
     {{- end }}
   {{- end }}
 {{- end }}
+
+
+{{ $opts := dict "transpiler" "libsass" "targetPath" "css/style.css" }}
+{{ with resources.Get "bulma/sass/base/_all.sass" | toCSS $opts  }}
+<link rel="stylesheet" href="{{ .RelPermalink }}"  crossorigin="anonymous">
+{{ end }}
