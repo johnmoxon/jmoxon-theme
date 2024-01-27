@@ -1,0 +1,89 @@
+// Base branding styles
+
+$family-sans-serif  : Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+$family-secondary: "Cardo","Baskerville","Calibri",serif;
+
+$family-primary: $family-sans-serif;
+$body-family: $family-sans-serif;
+
+// Colors
+$black: #000;
+$darkgreytext: #111;
+$lightgreytext: #ccc;
+$lightgreentext: #28c3ab;
+$lightgreentext_rgba: rgba(40,195,171,.2);
+$errortext: #c32836;
+$green: #28c3ab;
+$grey-dark: #111;
+$white: #fff;
+
+$content-blockquote-background-color: $white;
+// $content-blockquote-border-left
+
+// // Custom vars
+$primary: $green;
+$link: $primary;
+//
+// $info: $cyan;
+// $success: $green;
+// $warning: $yellow;
+// $danger: $red;
+// $dark: $grey-darker;
+// $text: $grey-dark;
+
+// Bulma configuration
+$widescreen-enabled: false;
+$fullhd-enabled: false;
+
+$column-gap: 2.2rem;
+    
+blockquote
+    background-color: white
+
+    p
+        font-size: 3rem
+        text-align: center
+        line-height: 3rem
+        @include for-phone-only
+            font-size: 1.8rem
+            line-height: 2rem
+
+    p cite
+        display: block
+        font-size: 1rem
+        text-align: right
+
+.content
+    figure
+        img
+            display: block !important
+        figcaption
+            @extend .is-size-7 
+            @extend .mb-5 
+            @extend .is-family-primary
+            font-style: normal !important
+            text-align: left
+            line-height: 1rem
+            // @extend .pt-0
+
+
+
+
+::selection
+    text-shadow: none;
+    background: $lightgreentext;
+    background: lighten($lightgreentext, 35%);
+
+::-moz-selection
+    text-shadow: none;
+    background: $lightgreentext;
+    background: lighten($lightgreentext, 35%);
+
+img::selection
+    background: 0 0
+
+img::-moz-selection
+    background: 0 0
+
+// body
+//     webkit-tap-highlight-color: rgba(255,255,255,.2);

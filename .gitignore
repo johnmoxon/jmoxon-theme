@@ -2,6 +2,7 @@
 /public/
 /resources/_gen/
 hugo_stats.json
+/tmp-articles
 
 # Temporary lock file while building
 /.hugo_build.lock

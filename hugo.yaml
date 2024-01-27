@@ -1,17 +1,35 @@
-baseURL: 'https://example.org/'
+baseURL: 'https://dev.jmoxon.net/'
 languageCode: en-us
-title: My New Hugo Site
+title: Learn. Grow. Lead.
 menus:
   main:
     - name: Home
       pageRef: /
       weight: 10
-    - name: Posts
-      pageRef: /posts
+    - name: About
+      pageRef: /about
       weight: 20
-    - name: Tags
-      pageRef: /tags
+    - name: Contact
+      pageRef: /contact
       weight: 30
+params:
+  subtitle: "Lessons Learned Through A Career In Digital Leadership"
+  description: Text about my cool site
+  mainSections: 
+    - "articles"
+  images:
+    - site-feature-image.jpg
+  title: My cool site
+  author:
+    name: John
+    test: 123
+    social:
+      linkedin:
+        user: johnmoxon
+      twitter:
+        user: johnmoxon  
+taxonomies:
+  series: series
 module:
   hugoVersion:
     extended: false
@@ -41,3 +59,9 @@ module:
       target: assets/bulma/sass/layout
     - source: sass/utilities
       target: assets/bulma/sass/utilities
+  mounts:
+    - source: ../jmoxon.net-personal-blog/content/articles
+      target: content/articles
+    - source: content/articles
+      target: content/articles
+

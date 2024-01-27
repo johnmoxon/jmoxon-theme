@@ -1,0 +1,8 @@
+<figure class="image">
+    <img src="{{.src}}" alt="{{.alt}}">
+    {{ with and .author .source .url }}
+    <figcaption class="is-size-7 mb-5 is-block">
+        Image by <a href="{{ $.url }}">{{ $.author }}</a> from <a href="{{ $.url }}">{{ $.source }}</a>
+    </figcaption>
+    {{ end }}
+</figure>

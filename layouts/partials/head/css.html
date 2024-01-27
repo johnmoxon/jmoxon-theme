@@ -1,4 +1,4 @@
-{{- with resources.Get "css/main.css" }}
+{{/*  {{- with resources.Get "css/main.css" }}
   {{- if eq hugo.Environment "development" }}
     <link rel="stylesheet" href="{{ .RelPermalink }}">
   {{- else }}
@@ -6,10 +6,52 @@
       <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
     {{- end }}
   {{- end }}
+{{- end }}  */}}
+
+{{/*  Base CSS build  */}}
+{{/*  Order is important  */}}
+{{- $css_bundle := slice 
+  (resources.Get "sass/bulma_vars.sass")
+  (resources.Get "bulma/sass/utilities/_all.sass")
+  (resources.Get "sass/utilities/breakpoints.sass")
+  (resources.Get "sass/utilities/helpers.sass")
+  (resources.Get "sass/theme/brand.sass")
+  (resources.Get "sass/theme/lazyload.sass")
+  (resources.Get "bulma/sass/base/_all.sass")
+  (resources.Get "bulma/sass/elements/box.sass")
+  (resources.Get "bulma/sass/elements/button.sass")
+  (resources.Get "bulma/sass/elements/container.sass")
+  (resources.Get "bulma/sass/elements/content.sass")
+  (resources.Get "bulma/sass/elements/icon.sass")
+  (resources.Get "bulma/sass/elements/image.sass")
+  (resources.Get "bulma/sass/elements/notification.sass")
+  (resources.Get "bulma/sass/elements/other.sass")
+  (resources.Get "bulma/sass/elements/tag.sass")
+  (resources.Get "bulma/sass/elements/title.sass")
+  (resources.Get "bulma/sass/form/shared.sass")
+  (resources.Get "bulma/sass/form/tools.sass")
+  (resources.Get "bulma/sass/form/input-textarea.sass")
+  (resources.Get "bulma/sass/components/breadcrumb.sass")
+  (resources.Get "bulma/sass/components/card.sass")
+  (resources.Get "bulma/sass/components/level.sass")
+  (resources.Get "bulma/sass/components/media.sass")
+  (resources.Get "bulma/sass/components/navbar.sass")
+  (resources.Get "bulma/sass/components/pagination.sass")
+  (resources.Get "bulma/sass/grid/columns.sass")
+  (resources.Get "bulma/sass/helpers/_all.sass")
+  (resources.Get "bulma/sass/layout/_all.sass")
+  (resources.Get "sass/components/card.sass")
+  (resources.Get "sass/components/navbar.sass")
+  | resources.Concat "bundle.sass"
+}}
+
+{{- $opts := dict "transpiler" "libsass" "targetPath" "css/bundle.css" }}
+{{- with $css_bundle | toCSS $opts }}
+  {{- if eq hugo.Environment "development" }}
+    <link rel="stylesheet" href="{{ .RelPermalink }}" crossorigin="anonymous">
+  {{- else }}
+    {{- with . | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
+    {{- end }}
+  {{- end }}
 {{- end }}
-
-
-{{ $opts := dict "transpiler" "libsass" "targetPath" "css/style.css" }}
-{{ with resources.Get "bulma/sass/base/_all.sass" | toCSS $opts  }}
-<link rel="stylesheet" href="{{ .RelPermalink }}"  crossorigin="anonymous">
-{{ end }}

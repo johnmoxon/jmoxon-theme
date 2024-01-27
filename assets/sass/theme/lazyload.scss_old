@@ -1,0 +1,10 @@
+.ls-blur-up-img {
+    filter: blur(10px);
+    opacity: 1;
+    transition: opacity 1000ms, filter 1500ms;
+}
+
+.ls-blur-up-img.ls-inview.ls-original-loaded {
+    opacity: 0;
+    filter: blur(5px);
+}

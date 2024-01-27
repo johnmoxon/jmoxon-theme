@@ -1,10 +1,43 @@
 {{ define "main" }}
-  <h1>{{ .Title }}</h1>
+
+<span class="is-block has-text-centered is-hidden-desktop">
+  <span class="icon">
+    <i class="fas fa-infinity"></i>
+    {{/*  <i class="fas fa-paper-plane"></i>  */}}
+    {{/*  <i class="fas fa-leaf"></i>  */}}
+    {{/*  <i class="fas fa-grip-lines"></i>  */}}
+    {{/*  <i class="fas fa-mug-hot"></i>  */}}
+  </span>
+</span>
+
+<section class="section" id="main_article">
+    <div class="container">
+        <div class="columns">
+            <div class="column is-10 is-offset-1">
+              <article class="pb-4">
+                <h1 class="title is-2 is-family-secondary" id="article_heading">{{ .Title }}</h1>
+                <h2 class="subtitle is-6 is-uppercase">{{ .Params.Subtitle }}</h2>
+                <span class="is-size-7 has-text-black">{{ printf "%d mins read" .ReadingTime }}</span>
+                
+                {{ partial "sharing_icons.html" . }}
+                {{ partial "figure.html" .Params.Image }}
+
+                <div class="content is-double-spaced is-size-5 is-family-secondary pb-6">
+                  {{ .Content }}
+                </div>
+              </article>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+  {{/*  <h1>{{ .Title }}</h1>
 
   {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
   {{ $dateHuman := .Date | time.Format ":date_long" }}
   <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
 
   {{ .Content }}
-  {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+  {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}  */}}
 {{ end }}

@@ -1,0 +1,10 @@
+<blockquote>
+    <p>
+        {{ if strings.ContainsNonSpace .Inner }}
+        {{ .Inner }}
+        {{ end }}
+        {{ with .Get "cite" }}
+        <cite>— {{ . }}</cite>
+        {{ end }}
+    </p>
+</blockquote>
