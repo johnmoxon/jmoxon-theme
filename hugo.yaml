@@ -59,9 +59,10 @@ module:
       target: assets/bulma/sass/layout
     - source: sass/utilities
       target: assets/bulma/sass/utilities
-  mounts:
-    - source: ../jmoxon.net-personal-blog/content/articles
-      target: content/articles
-    - source: content/articles
-      target: content/articles
+      
+  # dev mounts:
+  #   - source: ../jmoxon.net-personal-blog/content/articles
+  #     target: content/articles
+  #   - source: content/articles
+  #     target: content/articles
 
