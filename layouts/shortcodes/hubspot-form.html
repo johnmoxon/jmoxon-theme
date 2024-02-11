@@ -1,8 +1,8 @@
 <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>
 <script>
     hbspt.forms.create({
-        region: 'na1',
-        portalId: '{{ .Get "portalId" }}',
-        formId: '{{ .Get "formId" }}'
+        {{ with .Get "portalId" }}portalId: '{{ .Get "portalId" }}',{{ end }}
+        {{ with .Get "formId" }}formId: '{{ .Get "formId" }}',{{ end }}
+        region: 'na1'
     });
 </script>
