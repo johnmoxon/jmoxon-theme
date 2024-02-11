@@ -10,8 +10,7 @@
   <main>
     {{ block "main" . }}{{ end }}
   </main>
-  <footer>
-    {{ partial "footer.html" . }}
-  </footer>
+  
+  {{ partialCached "footer.html" . }}
 </body>
 </html>

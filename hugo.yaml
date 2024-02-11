@@ -1,4 +1,4 @@
-baseURL: 'https://dev.jmoxon.net/'
+baseURL: 'https://jmoxon.net/'
 languageCode: en-us
 title: Learn. Grow. Lead.
 menus:
@@ -7,19 +7,19 @@ menus:
       pageRef: /
       weight: 10
     - name: About
-      pageRef: /about
+      pageRef: /authors/
       weight: 20
     - name: Contact
       pageRef: /contact
       weight: 30
 params:
   subtitle: "Lessons Learned Through A Career In Digital Leadership"
-  description: Text about my cool site
+  # description: Text about my cool site
   mainSections: 
     - "articles"
   images:
     - site-feature-image.jpg
-  title: My cool site
+  
   author:
     name: John
     test: 123
@@ -29,7 +29,10 @@ params:
       twitter:
         user: johnmoxon  
 taxonomies:
-  series: series
+  # articles: articles
+  categories: categories
+  tags: tags
+  authors: authors
 module:
   hugoVersion:
     extended: false
@@ -59,10 +62,17 @@ module:
       target: assets/bulma/sass/layout
     - source: sass/utilities
       target: assets/bulma/sass/utilities
-      
-  # dev mounts:
-  #   - source: ../jmoxon.net-personal-blog/content/articles
-  #     target: content/articles
-  #   - source: content/articles
-  #     target: content/articles
+
+  # Dev mounts
+  mounts:
+    - source: ../jmoxon.net-personal-blog/content
+      target: content
+    - source: content
+      target: content
+    - source: ../jmoxon.net-personal-blog/content/articles
+      target: content/articles
+    - source: content/articles
+      target: content/articles
+    - source: ../jmoxon.net-personal-blog/content/authors
+      target: content/authors
 

@@ -6,11 +6,11 @@
       <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
     {{- end }}
   {{- end }}
-{{- end }}  */}}
-
-{{/*  Base CSS build  */}}
-{{/*  Order is important  */}}
-{{- $css_bundle := slice 
+  {{- end }}  */}}
+  
+  {{/*  Base CSS build  */}}
+  {{/*  Order is important  */}}
+  {{- $css_bundle := slice 
   (resources.Get "sass/bulma_vars.sass")
   (resources.Get "bulma/sass/utilities/_all.sass")
   (resources.Get "sass/utilities/breakpoints.sass")

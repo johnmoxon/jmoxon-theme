@@ -1,0 +1,42 @@
+{{ if eq ( .Scratch.Get "kind" ) "home" }}
+
+{{ end }}
+
+@@{{ .Scratch.Get "kind" }}!!!
+
+<div class="card is-shadowless">
+    <div class="columns is-gapless">
+        <div class="column">
+            <div class="card-image">
+                <figure class="image is-square is-relative">
+                    <a href="{{ .RelPermalink }}">
+                        <img src='{{ default "https://via.placeholder.com/290x362.png?text=image+is+4by5" (printf "%s%s" .Params.image.src "?w=290&h=362") }}'
+                            alt="Image by {{ .Params.image.author }} on {{ .Params.image.source }}" class="lazyload blur-up">
+                    </a>
+                    <span class="tag is-white is-ontop">{{ printf "%d mins read" .ReadingTime }}</span>
+                </figure>
+            </div>
+        </div>
+        <div class="column is-two-thirds">
+            <div class="card-content">
+                <div class="media">
+                    <div class="media-content">
+                        <h2 class="title is-4"><a href="{{ .RelPermalink }}" class="has-text-black">{{ .LinkTitle }}</a></h2>
+                    </div>
+                </div>
+
+                <div class="content">
+                    <a href="{{ .RelPermalink }}" class="has-text-black">
+                        {{ .Params.Summary }}
+                    </a>&nbsp;<a href="{{ .RelPermalink }}" class="is-link">read more&hellip;</a>
+                    <div class="tags pt-3">
+                        {{ range .Params.tags }}
+                        <span class="tag">#{{ . }}</span>
+                        {{ end }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>

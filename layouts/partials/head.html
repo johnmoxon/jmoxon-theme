@@ -1,12 +1,15 @@
-  <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ printf "%s | %s" .Title site.Title }}{{ end }}</title>
+  <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ printf "%s | %s" .Title .Site.Title }}{{ end }}</title>
     <meta charset="utf-8">
     {{/*  <meta name="viewport" content="width=device-width">  */}}
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" >
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     {{/*  google tag manager / google analytics internal template here  */}}
-
-  {{ partialCached "head/css.html" . }}
+    {{ if .Params.noindex }}
+    <meta name="robots" content="noindex,nofollow" /> 
+    {{ end }}
+    
+  {{ partial "head/css.html" . }}
 
     <link rel="preload" href="/fonts/Cardo/Cardo-Regular.woff2" as="font" crossorigin>
     <link rel="preload" href="/fonts/Montserrat/Montserrat-Regular.woff2" as="font" crossorigin>

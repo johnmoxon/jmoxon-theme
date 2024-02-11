@@ -1,0 +1,39 @@
+<div class='{{ with .Scratch.Get "kind" }}{{ if eq . "taxonomy" }}media{{end}}{{end}}'>
+    <figure class="is-align-self-flex-start mb-3">
+
+        <p class="image is-64x64">
+            <img src="{{ .Params.image }}" alt="{{ .Params.name }}" class="is-rounded">
+        </p>
+    </figure>
+    <div class="media-content">
+        <div class="content">
+            <h3 class="title is-5 mb-0">{{ .Params.fullname }}</h3>
+            <h4><small class="is-size-7">{{ .Params.position }}</small></h4>
+            {{ .Content }}
+            {{ with .Scratch.Get "kind" }}
+            {{ if eq . "taxonomy" }}
+            <a href="{{ $.Permalink }}" class="button">Read {{ $.Params.name }}'s articles</a>
+            {{ end }}
+            {{ end }}
+        </div>
+        <nav class="level is-mobile">
+            <div class="level-left">
+
+                {{ with .Params.Social.linkedin }}
+                <span class="icon">
+                    <a href="https://www.linkedin.com/in/{{.}}">
+                        <i class="fa-brands fa-linkedin has-text-black"></i>
+                    </a>
+                </span>
+                {{end}}
+                {{ with .Params.Social.twitter }}
+                <span class="icon">
+                    <a href="https://twitter.com/{{.}}">
+                        <i class="fa-brands fa-x-twitter has-text-black"></i>
+                    </a>
+                </span>
+                {{ end }}
+            </div>
+        </nav>
+    </div>
+</div>

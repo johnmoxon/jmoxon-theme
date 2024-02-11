@@ -17,6 +17,14 @@ $green: #28c3ab;
 $grey-dark: #111;
 $white: #fff;
 
+
+$link: $primary !default
+$link-invert: $primary-invert !default
+$link-focus-border: $primary !default
+$link-focus-border: $primary
+$button-focus-box-shadow-size: none !important
+
+
 $content-blockquote-background-color: $white;
 // $content-blockquote-border-left
 
@@ -36,6 +44,16 @@ $widescreen-enabled: false;
 $fullhd-enabled: false;
 
 $column-gap: 2.2rem;
+
+a.is-link,
+.content a
+    color: $primary
+
+
+a.is-link:hover, 
+article .content a:hover
+    text-decoration: underline
+    color: $primary
     
 blockquote
     background-color: white
