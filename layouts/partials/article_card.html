@@ -1,19 +1,21 @@
-{{ if eq ( .Scratch.Get "kind" ) "home" }}
 
+{{ $imageClass := "" }}
+{{ if (eq .SourceType "authors") }}
+{{ $imageClass = "is-3by5" }}
+{{ else }}
+{{ $imageClass = "is-square" }}
 {{ end }}
-
-@@{{ .Scratch.Get "kind" }}!!!
 
 <div class="card is-shadowless">
     <div class="columns is-gapless">
         <div class="column">
             <div class="card-image">
-                <figure class="image is-square is-relative">
-                    <a href="{{ .RelPermalink }}">
-                        <img src='{{ default "https://via.placeholder.com/290x362.png?text=image+is+4by5" (printf "%s%s" .Params.image.src "?w=290&h=362") }}'
-                            alt="Image by {{ .Params.image.author }} on {{ .Params.image.source }}" class="lazyload blur-up">
+                <figure class="image is-relative {{ $imageClass }}">
+                    <a href="{{ .Page.RelPermalink }}">
+                        <img src='{{ default "https://via.placeholder.com/290x362.png?text=image+is+4by5" (printf "%s%s" .Page.Params.image.src "?w=290&h=362") }}'
+                            alt="Image by {{ .Page.Params.image.author }} on {{ .Page.Params.image.source }}" class="lazyload blur-up">
                     </a>
-                    <span class="tag is-white is-ontop">{{ printf "%d mins read" .ReadingTime }}</span>
+                    <span class="tag is-white is-ontop">{{ printf "%d mins read" .Page.ReadingTime }}</span>
                 </figure>
             </div>
         </div>
@@ -21,16 +23,16 @@
             <div class="card-content">
                 <div class="media">
                     <div class="media-content">
-                        <h2 class="title is-4"><a href="{{ .RelPermalink }}" class="has-text-black">{{ .LinkTitle }}</a></h2>
+                        <h2 class="title is-4"><a href="{{ .Page.RelPermalink }}" class="has-text-black">{{ .Page.LinkTitle }}</a></h2>
                     </div>
                 </div>
 
                 <div class="content">
-                    <a href="{{ .RelPermalink }}" class="has-text-black">
-                        {{ .Params.Summary }}
-                    </a>&nbsp;<a href="{{ .RelPermalink }}" class="is-link">read more&hellip;</a>
+                    <a href="{{ .Page.RelPermalink }}" class="has-text-black">
+                        {{ .Page.Params.Summary }}
+                    </a>&nbsp;<a href="{{ .Page.RelPermalink }}" class="is-link">read more&hellip;</a>
                     <div class="tags pt-3">
-                        {{ range .Params.tags }}
+                        {{ range .Page.Params.tags }}
                         <span class="tag">#{{ . }}</span>
                         {{ end }}
                     </div>

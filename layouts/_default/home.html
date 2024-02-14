@@ -1,38 +1,46 @@
 {{ define "main" }}
 <div class="container">
+
   {{ with .Content }}
   <div class="content">
     {{.}}
   </div>
   {{ end }}
-
+  
   <div class="posts-list">
-  {{ $pagnum := .Paginator.PageNumber}}
-  {{ $pag := .Paginate (where site.RegularPages "Type" "in" site.Params.mainSections) }}
+    {{/* TODO: Convert this to us mainSections config param */}}
+    {{ $pages := where .Site.RegularPages "Section" "articles" }}
+    {{ $pages = $pages.ByDate }}
+    {{ $paginate := (.Paginate $pages) }}
 
-  {{ if eq $.Paginator.PageNumber 1 }}
-    {{ range $index, $element := first 1 $pag.Pages }}
-      {{ partial "article_highlight" . }}
+    {{/*  <pre>
+      {{ $paginate.PageNumber }}
+      --{{ jsonify (dict "indent" " ") $paginate }}
+    </pre>  */}}
+
+    {{/*  Show article highlight  */}}
+    {{/*  TODO: convert this to show pinned posts  */}}
+    {{ if eq $paginate.PageNumber 1 }}
+      {{ range $index, $element := $paginate.Pages | first 1 }}
+        {{ partial "article_highlight" . }}
+      {{ end }}
     {{ end }}
-  {{ end }}
 
-
+    {{/*  cycle through paginated articles   */}}
     <section class="section">
       <div class="article-list">
-        {{ range $index, $element := $pag.Pages }}
-          {{ if or (gt $index 0) (ne $.Paginator.PageNumber 1)  }}
-          {{ .Scratch.Set "source" "home" }}
-          {{ partial "article_card" . }}
+        {{ range $index, $element := $paginate.Pages }}
+          {{ if or (gt $index 0) (ne $paginate.PageNumber 1) }}
+            {{ .Scratch.Set "source" "home" }}
+            {{ partial "article_card" (dict "Page" . "SourceType" $.Type ) }}
           {{ end }}
         {{ end }}
       </div>
-      
-      
-      {{partial "pagination_links" .}}
+  
+      {{/*  Include the pagination links  */}}
+      {{ partial "pagination_links" . }}
+
     </section>
   </div>
-
-
-
 </div>
 {{ end }}

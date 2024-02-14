@@ -1,12 +1,16 @@
-{{ if or (.Paginator.HasPrev) (.Paginator.HasNext) }}
+{{ $pages := where .Site.RegularPages "Section" "articles" }}
+{{ $pages = $pages.ByDate }}
+{{ $paginate := (.Paginate $pages) }}
+
+{{ if or ($paginate.HasPrev) ($paginate.HasNext) }}
 <nav class="pagination" role="navigation" aria-label="pagination">
-    {{ if .Paginator.HasPrev }}
-    <a class="pagination-previous" href="{{ .Permalink }}page/{{ .Paginator.Prev.PageNumber }}/">&larr; newer posts </a>
+    {{ if $paginate.HasPrev }}
+    <a class="pagination-previous" href="{{ .Permalink }}page/{{ $paginate.Prev.PageNumber }}/">&larr; newer posts </a>
     {{ else }}
     <a class="pagination-previous is-disabled">&larr; newer posts </a>
     {{ end }}
-    {{ if .Paginator.HasNext }}
-    <a class="pagination-next" href="{{ .Permalink }}page/{{ .Paginator.Next.PageNumber }}/">older posts &rarr;</a>
+    {{ if $paginate.HasNext }}
+    <a class="pagination-next" href="{{ .Permalink }}page/{{ $paginate.Next.PageNumber }}/">older posts &rarr;</a>
     {{ else }}
     <a class="pagination-next is-disabled">older posts &rarr;</a>
     {{ end }}
