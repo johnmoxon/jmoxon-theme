@@ -1,6 +1,6 @@
 baseURL: 'https://jmoxon.net/'
 languageCode: en-us
-title: Learn. Grow. Lead.
+title: 'Theme site'
 menus:
   main:
     - name: Home
@@ -63,16 +63,9 @@ module:
     - source: sass/utilities
       target: assets/bulma/sass/utilities
 
-  # Dev mounts
-  # mounts:
-  #   - source: ../jmoxon.net-personal-blog/content
-  #     target: content
-  #   - source: content
-  #     target: content
-  #   - source: ../jmoxon.net-personal-blog/content/articles
-  #     target: content/articles
-  #   - source: content/articles
-  #     target: content/articles
-  #   - source: ../jmoxon.net-personal-blog/content/authors
-  #     target: content/authors
-
+  # Dev mounts - Merge real site content with 
+  mounts:
+    - source: ../jmoxon.net-personal-blog/content
+      target: content
+    - source: content
+      target: content
