@@ -13,7 +13,7 @@ menus:
       pageRef: /contact
       weight: 30
 params:
-  subtitle: "Lessons Learned Through A Career In Digital Leadership"
+  subtitle: "Subtitle here"
   # description: Text about my cool site
   mainSections: 
     - "articles"
