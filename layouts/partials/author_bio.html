@@ -1,0 +1,32 @@
+{{/* Add author block here */}}
+{{ range .Param "authors" }}
+{{ $name := . }}
+{{ $path := printf "/%s/%s" "authors" ($name | urlize) }}
+{{ with $.Site.GetPage $path }}
+<div class="media">
+    <figure class="media-left">
+        <p class="image is-64x64">
+            <img src="{{ .Params.image }}" class="is-rounded">
+        </p>
+    </figure>
+    <div class="media-content">
+        <div class="content">
+            <p>
+                <strong>{{ .Params.fullname }}</strong><br>
+                <small><strong>{{ .Params.position }}</strong></small>
+                <br>
+                {{ .Params.bio }}
+            </p>
+        </div>
+        <nav class="level is-mobile">
+            <div class="level-left">
+                <a class="level-item" href="{{ .Permalink }}">
+                    More articles&nbsp;
+                    <span class="icon is-small"><i class="fas fa-arrow-right"></i></span>
+                </a>
+            </div>
+        </nav>
+    </div>
+</div>
+{{ end }}
+{{ end }}

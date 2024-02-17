@@ -1,0 +1,37 @@
+{{ $related := $.Site.RegularPages.Related . | first 4 }}
+{{ with $related }}
+
+<section class="hero is-dark">
+  <div class="hero-body">
+    <h4 class="title is-6 is-spaced">Related posts</h4>
+
+    <div class="columns is-multiline">
+
+      {{ range . }}
+      <div class="column is-one-quarter">
+        <a href="{{ .Permalink }}">
+          <div class="box has-min-height px-3 py-3 is-shadowless">
+            <article class="media">
+              <div class="media-left is-hidden-tablet-only">
+                <figure class="image is-64x64">
+                  <img src='/assets/img/ph.png' alt="{{ .Title }}">
+                </figure>
+              </div>
+              <div class="media-content">
+                <p class="is-size-6 has-text-black">
+                  {{ .Title | truncate 50 }}
+                </p>
+              </div>
+            </article>
+          </div>
+        </a>
+      </div>
+      {{ end }}
+
+
+
+
+    </div>
+  </div>
+</section>
+{{ end }}
