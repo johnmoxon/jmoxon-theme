@@ -1,8 +1,15 @@
 {{ define "main" }}
-  <h1>{{ .Title }}</h1>
-  {{ .Content }}
-  {{ range .Pages }}
-    <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
-    {{ .Summary }}
-  {{ end }}
+<div class="container">
+  <section class="section">
+    <h2 class="title is-2 is-family-secondary">Tags &raquo; {{ .Title }}</h2>
+    {{ with .Content }}
+    <div class="content">
+      {{.}}
+    </div>
+    {{ end }}
+
+    {{ $pages := .Pages }}
+    {{ partial "posts_list" (dict "Page" . "FilteredPages" $pages) }}
+  </section>
+</div>
 {{ end }}

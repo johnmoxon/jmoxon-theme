@@ -1,46 +1,17 @@
 {{ define "main" }}
 <div class="container">
-
-  {{ with .Content }}
-  <div class="content">
-    {{.}}
-  </div>
-  {{ end }}
-  
-  <div class="posts-list">
-    {{/* TODO: Convert this to us mainSections config param */}}
-    {{ $pages := where .Site.RegularPages "Section" "articles" }}
-    {{ $pages = $pages.ByDate }}
-    {{ $paginate := (.Paginate $pages) }}
-
-    {{/*  <pre>
-      {{ $paginate.PageNumber }}
-      --{{ jsonify (dict "indent" " ") $paginate }}
-    </pre>  */}}
-
-    {{/*  Show article highlight  */}}
-    {{/*  TODO: convert this to show pinned posts  */}}
-    {{ if eq $paginate.PageNumber 1 }}
-      {{ range $index, $element := $paginate.Pages | first 1 }}
-        {{ partial "article_highlight" . }}
-      {{ end }}
+  <section class="section ml-5 mr-5">
+    {{ with .Content }}
+    <div class="content">
+      {{.}}
+    </div>
     {{ end }}
 
-    {{/*  cycle through paginated articles   */}}
-    <section class="section">
-      <div class="article-list">
-        {{ range $index, $element := $paginate.Pages }}
-          {{ if or (gt $index 0) (ne $paginate.PageNumber 1) }}
-            {{ .Scratch.Set "source" "home" }}
-            {{ partial "article_card" (dict "Page" . "SourceType" $.Type ) }}
-          {{ end }}
-        {{ end }}
-      </div>
-  
-      {{/*  Include the pagination links  */}}
-      {{ partial "pagination_links" . }}
+    {{ $pages := where $.Site.RegularPages "Section" "articles" }}
+    {{ partial "posts_list" (dict "Page" . "FilteredPages" $pages) }}
 
-    </section>
-  </div>
+  </section>
+
+  
 </div>
 {{ end }}
