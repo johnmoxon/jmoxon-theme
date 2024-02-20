@@ -1,0 +1,19 @@
+
+<nav class="breadcrumb is-size-7" aria-label="breadcrumbs">
+    <ul>
+        {{/*  Get the home page  */}}
+        {{- range .Ancestors.Reverse |first 1 }}
+        <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+        {{- end }}
+        
+        {{/*  If a category exists include */}}
+        {{ with .GetTerms "categories" }}
+        {{ range . }}
+        <li><a href="{{ .Permalink }}">{{strings.Title .Title }}</a></li>
+        {{ end }}
+        {{ end }}
+
+        {{/*  Link the existing page as active  */}}
+        <li class="is-active"><a href="{{ .RelPermalink }}" aria-current="page">{{ .Title }}</a></li>
+    </ul>
+</nav>
