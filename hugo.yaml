@@ -66,11 +66,11 @@ module:
 
 
 # Dev mounts - Merge real site content with 
-  mounts:
-    - source: ../jmoxon.net-personal-blog/content
-      target: content
-    # - source: content
-    #   target: content
-    - source: ../jmoxon.net-personal-blog/static
-      target: static
+  # mounts:
+  #   - source: ../jmoxon.net-personal-blog/content
+  #     target: content
+  #   # - source: content
+  #   #   target: content
+  #   - source: ../jmoxon.net-personal-blog/static
+  #     target: static
 
