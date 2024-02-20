@@ -1,0 +1,45 @@
+{{ define "main" }}
+{{/* {{ range .Pages }}
+<a href="{{ .Permalink }}" class="tag">#{{ .Name }}</a>
+{{ end }} */}}
+
+
+<div class="container">
+  <section class="ml-5 mr-5 section">
+    <h1 class="title is-family-secondary is-2">{{ .Title }}</h1>
+
+    <div class="is-flex is-flex-direction-row is-flex-wrap-wrap is-gap-2">
+      
+      {{$data := .Data }}
+      {{ range $key, $value := .Data.Terms.ByCount }}
+      {{/* If iter is zero then create a new ancestor */}}
+
+      <article class="panel has-half-width mb-0">
+        <p class="panel-heading">
+          {{ if eq $.Type "tags" }}#{{ end }}{{ $value.Name }}
+          <span class="tag is-rounded is-primary has-text-weight-bold is-pulled-right">{{ $value.Count }}</span>
+        </p>
+        {{ range $item := $value.WeightedPages | first 4 }}
+        <a href="{{$item.Permalink}}" class="panel-block">
+          <span class="panel-icon">
+            <i class="fas fa-book" aria-hidden="true"></i>
+          </span>
+          {{ $item.Title }}
+        </a>
+        {{ end }}
+        
+        <a href="{{ $.Site.LanguagePrefix | absURL }}{{ $data.Plural }}/{{ $value.Name | urlize }}/"
+          class="panel-block">
+          <span class="panel-icon">
+            <i class="fas fa-arrow-right" aria-hidden="true"></i>
+          </span>
+          View all
+        </a>
+      </article>
+      {{ end }}
+  
+    </div>
+
+  </section>
+</div>
+{{ end }}

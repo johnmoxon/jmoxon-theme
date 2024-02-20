@@ -9,7 +9,7 @@
     {{/* TODO: convert this to show pinned posts */}}
     {{ if and (eq $paginate.PageNumber 1) (eq .Page.Kind "home") }}
     {{ range $index, $element := $paginate.Pages | first 1 }}
-    {{ partial "article_highlight" .Page }}
+    {{ partial "article_highlight" (dict "Page" .Page "SourceType" .Page.Type ) }}
     {{ end }}
     {{ end }}
 

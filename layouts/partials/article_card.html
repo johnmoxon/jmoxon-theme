@@ -31,11 +31,7 @@
                     <a href="{{ .Page.RelPermalink }}" class="has-text-black">
                         {{ .Page.Params.Summary }}
                     </a>&nbsp;<a href="{{ .Page.RelPermalink }}" class="is-link">read more&hellip;</a>
-                    <div class="tags pt-3">
-                        {{ range .Page.Params.tags }}
-                        <span class="tag">#{{ . }}</span>
-                        {{ end }}
-                    </div>
+                    {{ partial "tags" .Page }}
                 </div>
             </div>
         </div>

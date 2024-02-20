@@ -1,32 +1,26 @@
 <div class="featured-post">
-    <a href="{{ .RelPermalink }}">
+    <a href="{{ .Page.RelPermalink }}">
         <div class="card is-shadowless">
-            <h2 class="title is-size-3 is-size-5-mobile padded-multiline"><span>{{ .LinkTitle }}</span></h2>
+            <h2 class="title is-size-3 is-size-5-mobile padded-multiline"><span>{{ .Page.LinkTitle }}</span></h2>
             <div class="card-image">
                 <figure class="image is-2by1 is-relative">
-                    <a href="{{ .RelPermalink }}">
-                        <img src='{{ default "/images/ph.png" .Params.image.src }}' class='lazyload blur-up' {{ with
-                            .Params.image }}alt='Image by {{ .author }} on {{ .source }}' {{end}}>
+                    <a href="{{ .Page.RelPermalink }}">
+                        <img src='{{ default "/images/ph.png" .Page.Params.image.src }}' class='lazyload blur-up' {{ with
+                            .Page.Params.image }}alt='Image by {{ .author }} on {{ .source }}' {{end}}>
                         {{/* alt='{{ with .Page.Params.image.author }}Image by {{ .Page.Params.image.author}} on {{
                         .Page.Params.image.source}}{{ end }}' */}}
                     </a>
-                    <span class="tag is-white is-ontop-right">{{ printf "%d mins read" .ReadingTime }}</span>
+                    <span class="tag is-white is-ontop-right">{{ printf "%d mins read" .Page.ReadingTime }}</span>
                 </figure>
             </div>
             {{/* {{ with .Page.Params.Summary }} */}}
             <div class="card-content">
-                <div class="content">
-                    <a href="{{ .RelPermalink }}" class="has-text-black">
-                        {{ .Params.Summary }} 
-                    </a>&nbsp;<a href="{{ .RelPermalink }}" class="is-link">read more&hellip;</a>
+                <div class="content mb-3">
+                    <a href="{{ .Page.RelPermalink }}" class="has-text-black">
+                        {{ .Page.Params.Summary }} 
+                    </a>&nbsp;<a href="{{ .Page.RelPermalink }}" class="is-link">read more&hellip;</a>
                 </div>
-                {{ if .Params.tags }}
-                <div class="tags">
-                    {{ range .Params.tags }}
-                    <span class="tag">#{{ . }}</span>
-                    {{ end }}
-                </div>
-                {{ end }}
+                {{ partial "tags" .Page }}
             </div>
         </div>
     </a>
