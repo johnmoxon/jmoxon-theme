@@ -1,5 +1,6 @@
 {{- $social := .social }}
-
+{{- $page := .Page }}
+{{- $BaseURL := .BaseURL }}
 
 {{ if .social.linkedin.user  }}
 <span class="icon">
@@ -16,7 +17,7 @@
 </span>
 {{ end }}
 <span class="icon">
-    <a href="/feed.xml" class="RSS Feed">
+    <a href="{{ $BaseURL }}index.xml" class="RSS Feed">
     <i class="fa-solid fa-rss has-text-black"></i>
     </a>
 </span>

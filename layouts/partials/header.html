@@ -5,4 +5,4 @@
       <h1 class="title is-size-1 is-size-2-mobile has-text-black is-family-secondary"><a href="/" class="has-text-black">{{ .Site.Title }}</a></h1>
     </div>
 </section>
-{{ partial "menu" (dict "menuID" "main" "page" . "social" .Site.Params.author.social) }}
+{{ partial "menu" (dict "menuID" "main" "page" . "social" .Site.Params.author.social "BaseURL" .Site.BaseURL) }}

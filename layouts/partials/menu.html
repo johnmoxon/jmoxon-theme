@@ -12,6 +12,8 @@
   {{- $page := .page }}
   {{- $menuID := .menuID }}
   {{- $social := .social }}
+  {{- $BaseURL := .BaseURL }}
+
 
 {{- with index site.Menus $menuID }}
   <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -29,7 +31,7 @@
         {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
 
         <div class="navbar-item sharing-utility">
-        {{ partial "social_icon_links" (dict "social" $social) }}
+        {{ partial "social_icon_links" (dict "social" $social "Page" $page "BaseURL" $BaseURL) }}
         </div>
       </div>
       <div class="navbar-end"></div>
