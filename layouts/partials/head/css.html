@@ -10,8 +10,11 @@
   
   {{/*  Base CSS build  */}}
   {{/*  Order is important  */}}
+  
   {{- $css_bundle := slice 
   (resources.Get "sass/bulma_vars.sass")
+
+
   (resources.Get "bulma/sass/utilities/_all.sass")
   (resources.Get "sass/utilities/breakpoints.sass")
   (resources.Get "sass/utilities/helpers.sass")
@@ -35,9 +38,11 @@
   (resources.Get "bulma/sass/components/card.sass")
   (resources.Get "bulma/sass/components/level.sass")
   (resources.Get "bulma/sass/components/media.sass")
+  (resources.Get "bulma/sass/components/menu.sass")
   (resources.Get "bulma/sass/components/navbar.sass")
   (resources.Get "bulma/sass/components/pagination.sass")
-  (resources.Get "bulma/sass/grid/columns.sass")
+  (resources.Get "bulma/sass/components/panel.sass")
+  (resources.Get "bulma/sass/grid/_all.sass")
   (resources.Get "bulma/sass/helpers/_all.sass")
   (resources.Get "bulma/sass/layout/_all.sass")
   (resources.Get "sass/components/card.sass")
