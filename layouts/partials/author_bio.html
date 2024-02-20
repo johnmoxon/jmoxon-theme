@@ -3,7 +3,7 @@
 {{ $name := . }}
 {{ $path := printf "/%s/%s" "authors" ($name | urlize) }}
 {{ with $.Site.GetPage $path }}
-<div class="media">
+<div class="media box">
     <figure class="media-left">
         <p class="image is-64x64">
             <img src="{{ .Params.image }}" class="is-rounded">
