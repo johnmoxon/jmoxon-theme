@@ -1,0 +1,74 @@
+{{/***********************************
+Image Constants
+**************************************/}}
+{{/*
+These are breakpoints, in pixels.
+Adjust these to fit your use cases.
+Obviously, the more breakpoints, the more images you'll be producing.
+(Fortunately, Hugo does that **really** fast, as you'd expect,
+but watch out for any storage issues this can present either
+locally or in your online repo, especially if you have a really
+large number of original images.)
+*/}}
+{{- $respSizes := slice "320" "640" "760" "1024" "1280" "1420" -}}
+{{/*
+The styling in $imgClass, below, makes an image fill the container
+horizontally and adjust its height automatically for that, and then
+fade in for the LQIP effect.
+Feel free to adjust your CSS/SCSS as desired.
+*/}}
+{{- $imgClass := "w-full h-auto animate-fade" -}}
+{{- $dataSzes := "(min-width: 1024px) 100vw, 50vw" -}}
+
+
+{{/***********************************
+Variables - Map from parameters
+**************************************/}}
+{{- $src := .src -}}{{/* REQUIRED */}}
+{{- $alt := default "no alt parameter set!" .alt -}}
+{{- $holder := default "GIP" .holder -}}
+{{- $hint := default "photo" .hint -}}
+{{- /* ^^ applicable only to webp: https://gohugo.io/content-management/image-processing/#hint */ -}}
+{{- $filter := default false .filter -}}
+
+{{/***********************************
+Calculated - Keep in partial
+**************************************/}}
+{{- $imgBd5 := md5 $src -}}
+{{- $divClass := print "is-relative bg-center imgB-" $imgBd5 "-" $holder -}}
+{{/*
+Then, we create a 640-pixel-wide JPG of the image.
+This will serve as the "fallback" image for that tiny percentage
+of browsers that don't understand the HTML `picture` tag.
+*/}}
+{{- $actualImg := $src.Resize (printf "%s%s" "640x jpg " $filter) -}}
+
+<div class="{{ $divClass }} image">
+  {{/*
+  Now we'll build the `picture` which modern browsers use to decide
+  which image, and which format thereof, to show. Remember to put
+  `webp` first, since the browser will use the first format it
+  **can** use, and WebP files usually are smaller. After WebP,
+  the fallback is the universally safe JPG format.
+  */}}
+  <picture>
+    <source type="image/webp" srcset="
+        {{- with $respSizes -}}
+          {{- range $i, $e := . -}}
+            {{- if ge $src.Width . -}}
+              {{- if $i }}, {{ end -}}{{- ($src.Resize (print . "x webp " $hint " " $filter) ).RelPermalink }} {{ . }}w
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}" sizes="{{ $dataSzes }}" />
+    <source type="image/jpeg" srcset="
+        {{- with $respSizes -}}
+          {{- range $i, $e := . -}}
+            {{- if ge $src.Width . -}}
+              {{- if $i }}, {{ end -}}{{- ($src.Resize (print . "x jpg " $filter) ).RelPermalink }} {{ . }}w
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}" sizes="{{ $dataSzes }}" />
+    <img class="{{ $imgClass }}" src="{{ $actualImg.RelPermalink }}" width="{{ $src.Width }}" height="{{ $src.Height }}"
+      alt="{{ $alt }}" title="{{ $alt }}" loading="lazy" />
+  </picture>
+</div>
