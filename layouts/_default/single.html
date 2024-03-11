@@ -19,9 +19,15 @@
       <span class="is-size-7 has-text-black">{{ printf "%d mins read" .ReadingTime }}</span>
 
       {{ partial "sharing_icons.html" . }}
-      {{ partial "figure.html" .Params.Image }}
+      {{ partial "images/figure" (dict "Page" .
+        "src" (.Page.Resources.GetMatch .Params.Image.src)
+        "alt" .Params.Image.alt
+        "caption" "Image by"
+        "attr" (print .Params.Image.author " at " .Params.Image.source)
+        "attrlink" .Params.Image.url
+      )}}
 
-      <div class="content is-double-spaced is-size-5 is-family-secondary pb-6">
+      <div class="content is-double-spaced is-size-5 is-family-secondary pb-6 mt-5">
         {{ .Content }}
       </div>
     </article>
