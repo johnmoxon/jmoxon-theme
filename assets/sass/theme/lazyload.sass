@@ -1,8 +1,28 @@
-.ls-blur-up-img
-    opacity: 1
-    filter: blur(10px)
-    // transition: opacity 1000ms, filter 1500ms
+// .ls-blur-up-img
+//     opacity: 1
+//     filter: blur(10px)
+//     // transition: opacity 1000ms, filter 1500ms
 
-.ls-blur-up-img.ls-inview.ls-original-loaded
-    opacity: 0
-    filter: blur(5px)
+// .ls-blur-up-img.ls-inview.ls-original-loaded
+//     opacity: 0
+//     filter: blur(5px)
+
+
+.bg-center
+    background-position: center
+
+.w-full
+    width: 100%
+
+.h-auto
+    height: auto
+
+@keyframes fadeIn
+    0%
+        opacity: 0
+    to
+        opacity: 1
+
+.animate-fade
+    animation: fadeIn 750ms ease-in-out
+

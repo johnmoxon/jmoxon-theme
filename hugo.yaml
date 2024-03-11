@@ -15,11 +15,10 @@ menus:
 params:
   subtitle: "Subtitle here"
   # description: Text about my cool site
-  mainSections: 
+  mainSections:
     - "articles"
   images:
     - site-feature-image.jpg
-  
   author:
     name: John
     test: 123
@@ -27,7 +26,14 @@ params:
       linkedin:
         user: johnmoxon
       twitter:
-        user: johnmoxon  
+        user: johnmoxon
+
+imaging:
+  bgColor: '#ffffff'
+  hint: photo
+  quality: 80
+  resampleFilter: box
+
 taxonomies:
   # articles: articles
   categories: categories
@@ -61,12 +67,18 @@ module:
       target: assets/sass/bulma/layout
 
 
-# Dev mounts - Merge real site content with 
-  # mounts:
-    # - source: ../jmoxon.net-personal-blog/content
-    #   target: content
-    # - source: content
-    #   target: content
-    # - source: ../jmoxon.net-personal-blog/static
-    #   target: static
+# Dev mounts - Merge real site content with
+  mounts:
+    - source: ../jmoxon.net/content
+      target: content
+    - source: content
+      target: content
+    - source: ../jmoxon.net/static
+      target: static
+    - source: static
+      target: static
+    - source: ../jmoxon.net/assets
+      target: assets
+    - source: assets
+      target: assets
 

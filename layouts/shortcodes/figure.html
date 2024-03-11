@@ -1,0 +1,15 @@
+{{ partial "images/figure" (dict "Page" .
+  "src" (.Page.Resources.GetMatch (.Get "src"))
+  "alt" (default "no alt tag is set!" (.Get "alt"))
+  "holder" (default "GIP" (.Get "holder"))
+  "hint" (default "photo" (.Get "hint"))
+  "filter" (default false (.Get "filter"))
+  "class" (default nil (.Get "class"))
+  "link" (default nil (.Get "link"))
+  "target" (default nil (.Get "target"))
+  "rel" (default nil (.Get "rel"))
+  "title" (default nil (.Get "title"))
+  "caption" (default nil (.Get "caption"))
+  "attr" (default nil (.Get "attr"))
+  "attrlink" (default nil (.Get "attrlink"))
+)}}
