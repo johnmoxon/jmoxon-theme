@@ -19,8 +19,11 @@
       <span class="is-size-7 has-text-black">{{ printf "%d mins read" .ReadingTime }}</span>
 
       {{ partial "sharing_icons.html" . }}
+
+
       {{ partial "images/figure" (dict "Page" .
         "src" (.Page.Resources.GetMatch .Params.Image.src)
+        "ratio" "3/2"
         "alt" .Params.Image.alt
         "caption" "Image by"
         "attr" (print .Params.Image.author " at " .Params.Image.source)

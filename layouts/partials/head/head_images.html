@@ -1,24 +1,44 @@
-{{- with .Resources.ByType "image" }}
-	<style media="screen">
-	{{- range . -}}
+{{/* Attempt to set images slice to page resources
+  but if bundle type is branch then find first page
+  image resource for page in paginated list
+*/}}
+{{ $pageImages := .Resources.ByType "image" }}
+{{ if eq .BundleType "branch" }}
+  {{ $pages := (where $.Site.RegularPages "Section" "articles").ByDate }}
+  {{ $paginate := (.Page.Paginate $pages) }}
+  {{ $headerImages := slice }}
+
+  {{ range $paginate.Pages }}
+    {{ with .Resources.GetMatch .Params.image.src }}
+      {{ $headerImages = $headerImages | append (slice .) }}
+    {{ end }}
+  {{ end }}
+  {{ $pageImages = $headerImages }}
+{{ end }}
+
+{{- with $pageImages }}
+<style media="screen" data-type="image-placeholders">
+  {{- range . -}}
 		{{- $src := . -}}
 		{{- $imgBd5 := md5 .Name -}}
-		{{- $BkgdStyleEnd := print "; background-size: cover; background-repeat: no-repeat; aspect-ratio: " $src.Width " / " $src.Height ";" -}}
-		{{- $GIP_colors := $src.Colors -}}
-		{{- if (lt ($GIP_colors | len) 2) -}}
-			{{- $GIP_colors = $GIP_colors | append "#000000" -}}
-		{{- end -}}
-		{{- $GIP_bkgd := delimit ($GIP_colors) ", " -}}
-		{{- $BkgdStyleGIP := print "background: linear-gradient(" $GIP_bkgd ")" $BkgdStyleEnd -}}
-		{{- $LQIP_img := $src.Resize "20x jpg q20" -}}
-		{{- $LQIP_b64 := $LQIP_img.Content | base64Encode -}}
-		{{- $BkgdStyleLQIP := print "background: url(data:image/jpeg;base64," $LQIP_b64 ")" $BkgdStyleEnd }}
-		.imgB-{{ $imgBd5 }}-GIP {
-			{{ $BkgdStyleGIP | safeCSS }}
-		}
-		.imgB-{{ $imgBd5 }}-LQIP {
-			{{ $BkgdStyleLQIP | safeCSS }}
-		}
+    {{- range $ratio, $imgSizes := $.Site.Params.imaging.aspectRatios }}
+      {{- $BkgdStyleEnd := printf "%s %s%s" "; background-size: cover; background-repeat: no-repeat; aspect-ratio:" $ratio ";" -}}
+      {{- $GIP_colors := $src.Colors -}}
+      {{- if (lt ($GIP_colors | len) 2) -}}
+        {{- $GIP_colors = $GIP_colors | append "#000000" -}}
+      {{- end -}}
+      {{- $GIP_bkgd := delimit ($GIP_colors) ", " -}}
+      {{- $BkgdStyleGIP := print "background: linear-gradient(" $GIP_bkgd ")" $BkgdStyleEnd -}}
+      {{- $LQIP_img := $src.Resize "20x jpg q20" -}}
+      {{- $LQIP_b64 := $LQIP_img.Content | base64Encode -}}
+      {{- $BkgdStyleLQIP := print "background: url(data:image/jpeg;base64," $LQIP_b64 ")" $BkgdStyleEnd }}
+      .imgB-{{ $imgBd5 }}-rt{{ replace $ratio "/" "_" }}-GIP {
+        {{ $BkgdStyleGIP | safeCSS }}
+      }
+      .imgB-{{ $imgBd5 }}-rt{{ replace $ratio "/" "_" }}-LQIP {
+        {{ $BkgdStyleLQIP | safeCSS }}
+      }
+    {{- end }}
 	{{- end }}
 	</style>
 {{ end }}

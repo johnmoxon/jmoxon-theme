@@ -17,11 +17,38 @@ params:
   # description: Text about my cool site
   mainSections:
     - "articles"
-  images:
-    - site-feature-image.jpg
+  imaging:
+    aspectRatios:
+      '3/2':
+        - [320, 213]
+        - [640, 427]
+        - [1024, 683]
+        - [1280, 853]
+        - [1420, 947]
+      '1/1':
+        - [320, 320]
+        - [640, 640]
+    '3/2':
+      srcset:
+        - [320, 213]
+        - [640, 427]
+        - [1024, 683]
+        - [1280, 853]
+        - [1420, 947]
+      sizes:
+        - "(min-width: 1024px) 60vw"
+        - "90vw"
+    '1/1':
+      srcset:
+        - [320, 320]
+        - [640, 640]
+      sizes:
+        - "(min-width: 1024px) 26vw"
+        - "(min-width: 768px) 30vw"
+        - "90vw"
+
   author:
     name: John
-    test: 123
     social:
       linkedin:
         user: johnmoxon
@@ -33,6 +60,7 @@ imaging:
   hint: photo
   quality: 80
   resampleFilter: box
+  anchor: "Center"
 
 taxonomies:
   # articles: articles
@@ -68,17 +96,17 @@ module:
 
 
 # Dev mounts - Merge real site content with
-  # mounts:
-  #   - source: ../jmoxon.net/content
-  #     target: content
-  #   - source: content
-  #     target: content
-  #   - source: ../jmoxon.net/static
-  #     target: static
-  #   - source: static
-  #     target: static
-  #   - source: ../jmoxon.net/assets
-  #     target: assets
-  #   - source: assets
-  #     target: assets
+  mounts:
+    - source: ../jmoxon.net/content
+      target: content
+    - source: content
+      target: content
+    - source: ../jmoxon.net/static
+      target: static
+    - source: static
+      target: static
+    - source: ../jmoxon.net/assets
+      target: assets
+    - source: assets
+      target: assets
 

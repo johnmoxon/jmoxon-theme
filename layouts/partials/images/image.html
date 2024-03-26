@@ -10,7 +10,18 @@ but watch out for any storage issues this can present either
 locally or in your online repo, especially if you have a really
 large number of original images.)
 */}}
-{{- $respSizes := slice "320" "640" "760" "1024" "1280" "1420" -}}
+{{ $method := default "fill" .method }}
+{{ $ratio := default "3/2" .ratio }}
+{{ $ratioParts := (split $ratio "/") }}
+{{ $ratioDict := dict "x" (int (index $ratioParts 0)) "y" (int (index $ratioParts 1)) }}
+{{ $initXDimen := 640 }}
+{{ $initYDimen := math.Ceil (mul (div $initXDimen $ratioDict.x) $ratioDict.y) }}
+{{ $initDimen := string (printf "%sx%s" (string $initXDimen) (string $initYDimen)) }}
+{{/*  {{- $respSizes := (index .Page.Site.Params.imaging.aspectRatios $ratio) -}}  */}}
+{{- $respImages := (index .Page.Site.Params.imaging $ratio) -}}
+{{- $respSrcSets := (index $respImages "srcset") -}}
+{{- $respSizes := default (delimit (index $respImages "sizes") ", ") .sizes -}}
+
 {{/*
 The styling in $imgClass, below, makes an image fill the container
 horizontally and adjust its height automatically for that, and then
@@ -18,7 +29,7 @@ fade in for the LQIP effect.
 Feel free to adjust your CSS/SCSS as desired.
 */}}
 {{- $imgClass := "w-full h-auto animate-fade" -}}
-{{- $dataSzes := "(min-width: 1024px) 100vw, 50vw" -}}
+{{/*  {{- $dataSzes := "(min-width: 1024px) 60vw, 90vw" -}}  */}}
 
 
 {{/***********************************
@@ -31,19 +42,27 @@ Variables - Map from parameters
 {{- /* ^^ applicable only to webp: https://gohugo.io/content-management/image-processing/#hint */ -}}
 {{- $filter := default false .filter -}}
 
+{{/*  Required for use in posts list - breaks do one thing well  */}}
+{{- $readingTime := default nil .readingTime -}}
+
+
 {{/***********************************
 Calculated - Keep in partial
 **************************************/}}
 {{- $imgBd5 := md5 $src -}}
-{{- $divClass := print "is-relative bg-center imgB-" $imgBd5 "-" $holder -}}
+{{ $ratioID := print "-rt" (replace $ratio "/" "_") }}
+{{- $divClass := print "is-relative image bg-center imgB-" $imgBd5 $ratioID "-" $holder -}}
+
 {{/*
 Then, we create a 640-pixel-wide JPG of the image.
 This will serve as the "fallback" image for that tiny percentage
 of browsers that don't understand the HTML `picture` tag.
 */}}
-{{- $actualImg := $src.Resize (printf "%s%s" "640x jpg " $filter) -}}
+{{- $actualImg := $src.Process (printf "%s %s %s %s" $method $initDimen "jpg Center" $filter) -}}
 
-<div class="{{ $divClass }} image">
+<div class="{{ $divClass }}">
+
+
   {{/*
   Now we'll build the `picture` which modern browsers use to decide
   which image, and which format thereof, to show. Remember to put
@@ -52,23 +71,28 @@ of browsers that don't understand the HTML `picture` tag.
   the fallback is the universally safe JPG format.
   */}}
   <picture>
-    <source type="image/webp" srcset="
-        {{- with $respSizes -}}
-          {{- range $i, $e := . -}}
-            {{- if ge $src.Width . -}}
-              {{- if $i }}, {{ end -}}{{- ($src.Resize (print . "x webp " $hint " " $filter) ).RelPermalink }} {{ . }}w
-            {{- end -}}
+    <source type="image/webp" srcset='
+      {{- with $respSrcSets -}}
+        {{- range $i, $e := . -}}
+          {{- if ge $src.Width . -}}
+            {{- if $i }}, {{ end -}}
+            {{- ($src.Process (printf "%s %s %s %s %s %s" $method (delimit . "x") "webp" "Center" $hint $filter) ).RelPermalink }} {{ index . 0 }}w
           {{- end -}}
-        {{- end -}}" sizes="{{ $dataSzes }}" />
-    <source type="image/jpeg" srcset="
-        {{- with $respSizes -}}
-          {{- range $i, $e := . -}}
-            {{- if ge $src.Width . -}}
-              {{- if $i }}, {{ end -}}{{- ($src.Resize (print . "x jpg " $filter) ).RelPermalink }} {{ . }}w
-            {{- end -}}
+        {{- end -}}
+      {{- end -}}' sizes="{{ $respSizes }}" />
+    <source type="image/jpeg" srcset='
+      {{- with $respSrcSets -}}
+        {{- range $i, $e := . -}}
+          {{- if ge $src.Width . -}}
+            {{- if $i }}, {{ end -}}
+            {{- ($src.Process (printf "%s %s %s %s %s" $method (delimit . "x") "jpg" "Center" $filter) ).RelPermalink }} {{ index . 0 }}w
           {{- end -}}
-        {{- end -}}" sizes="{{ $dataSzes }}" />
+        {{- end -}}
+      {{- end -}}' sizes="{{ $respSizes }}" />
     <img class="{{ $imgClass }}" src="{{ $actualImg.RelPermalink }}" width="{{ $src.Width }}" height="{{ $src.Height }}"
       alt="{{ $alt }}" title="{{ $alt }}" loading="lazy" />
   </picture>
+  {{- with $readingTime }}
+  <span class="tag is-white is-ontop-right">{{ printf "%d mins read" . }}</span>
+  {{ end -}}
 </div>

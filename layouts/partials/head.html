@@ -50,6 +50,7 @@
     <script src="https://cdn.plot.ly/plotly-2.28.0.min.js"></script>
     {{ end }}
 
+
     {{/* Include CSS for lqip's */}}
     {{ partial "head/head_images" . }}
 
@@ -58,5 +59,12 @@
 
     <link rel="icon" href="/images/favicon.png">
 
+    {{ partialCached "head/js.html" . }}
 
-{{ partialCached "head/js.html" . }}
+    {{ if ne hugo.Environment "production" }}
+    <meta name="type" content="{{ .Type }}">
+    <meta name="kind" content="{{ .Kind }}">
+    <meta name="isPage" content="{{ .IsPage }}">
+    <meta name="isSection" content="{{ .IsSection }}">
+    <meta name="bundleType" content="{{ .BundleType }}">
+    {{ end }}

@@ -1,22 +1,14 @@
-
-{{ $imageClass := "" }}
-{{ if (eq .SourceType "authors") }}
-{{ $imageClass = "is-3by5" }}
-{{ else }}
-{{ $imageClass = "is-square" }}
-{{ end }}
-
 <div class="card is-shadowless">
     <div class="columns is-gapless">
         <div class="column">
             <div class="card-image">
-                <figure class="image is-relative {{ $imageClass }}">
-                    <a href="{{ .Page.RelPermalink }}">
-                        <img src='{{ default "https://via.placeholder.com/290x362.png?text=image+is+4by5" (printf "%s%s" .Page.Params.image.src "?w=290&h=362") }}'
-                            alt="Image by {{ .Page.Params.image.author }} on {{ .Page.Params.image.source }}" class="lazyload blur-up">
-                    </a>
-                    <span class="tag is-white is-ontop">{{ printf "%d mins read" .Page.ReadingTime }}</span>
-                </figure>
+                {{ partial "images/image" (dict
+                  "Page" .Page
+                  "src" (.Page.Resources.GetMatch .Page.Params.Image.src)
+                  "alt" .Page.Params.Image.alt
+                  "readingTime" .Page.ReadingTime
+                  "ratio" "1/1"
+                ) }}
             </div>
         </div>
         <div class="column is-two-thirds">

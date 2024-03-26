@@ -2,22 +2,19 @@
     <a href="{{ .Page.RelPermalink }}">
         <div class="card is-shadowless">
             <h2 class="title is-size-3 is-size-5-mobile padded-multiline"><span>{{ .Page.LinkTitle }}</span></h2>
-            <div class="card-image">
-                <figure class="image is-2by1 is-relative">
-                    <a href="{{ .Page.RelPermalink }}">
-                        <img src='{{ default "/images/ph.png" .Page.Params.image.src }}' class='lazyload blur-up' {{ with
-                            .Page.Params.image }}alt='Image by {{ .author }} on {{ .source }}' {{end}}>
-                        {{/* alt='{{ with .Page.Params.image.author }}Image by {{ .Page.Params.image.author}} on {{
-                        .Page.Params.image.source}}{{ end }}' */}}
-                    </a>
-                    <span class="tag is-white is-ontop-right">{{ printf "%d mins read" .Page.ReadingTime }}</span>
-                </figure>
+            <div class="card-image image">
+              {{ partial "images/image" (dict
+                "Page" .Page
+                "src" (.Page.Resources.GetMatch .Page.Params.Image.src)
+                "alt" .Page.Params.Image.alt
+                "readingTime" .Page.ReadingTime
+              ) }}
             </div>
             {{/* {{ with .Page.Params.Summary }} */}}
             <div class="card-content">
                 <div class="content mb-3">
                     <a href="{{ .Page.RelPermalink }}" class="has-text-black">
-                        {{ .Page.Params.Summary }} 
+                        {{ .Page.Params.Summary }}
                     </a>&nbsp;<a href="{{ .Page.RelPermalink }}" class="is-link">read more&hellip;</a>
                 </div>
                 {{ partial "tags" .Page }}
