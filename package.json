@@ -6,8 +6,8 @@
   "author": "John Moxon <jmoxon@gmaill.com>",
   "license": "MIT",
   "scripts": {
-    "server": "hugo server --bind 0.0.0.0 --disableFastRender --baseURL https://dev.jmoxon.net/ --appendPort=false --liveReloadPort 443",
-    "drafts": "hugo server --bind 0.0.0.0 --disableFastRender --baseURL https://dev.jmoxon.net/ --appendPort=false --buildDrafts --liveReloadPort 443",
+    "server": "hugo server --bind 0.0.0.0 --disableFastRender --appendPort=false --liveReloadPort 443",
+    "drafts": "hugo server --bind 0.0.0.0 --disableFastRender --appendPort=false --buildDrafts --liveReloadPort 443",
     "build": "hugo"
   }
 }
