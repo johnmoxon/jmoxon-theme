@@ -18,9 +18,10 @@ large number of original images.)
 {{ $initYDimen := math.Ceil (mul (div $initXDimen $ratioDict.x) $ratioDict.y) }}
 {{ $initDimen := string (printf "%sx%s" (string $initXDimen) (string $initYDimen)) }}
 {{/*  {{- $respSizes := (index .Page.Site.Params.imaging.aspectRatios $ratio) -}}  */}}
-{{- $respImages := (index .Page.Site.Params.imaging $ratio) -}}
+{{- $respImages := (index .Page.Site.Params.imaging.aspectRatios $ratio) -}}
 {{- $respSrcSets := (index $respImages "srcset") -}}
 {{- $respSizes := default (delimit (index $respImages "sizes") ", ") .sizes -}}
+
 
 {{/*
 The styling in $imgClass, below, makes an image fill the container
@@ -29,13 +30,12 @@ fade in for the LQIP effect.
 Feel free to adjust your CSS/SCSS as desired.
 */}}
 {{- $imgClass := "w-full h-auto animate-fade" -}}
-{{/*  {{- $dataSzes := "(min-width: 1024px) 60vw, 90vw" -}}  */}}
 
 
 {{/***********************************
 Variables - Map from parameters
 **************************************/}}
-{{- $src := .src -}}{{/* REQUIRED */}}
+{{- $src := .src -}} {{/* REQUIRED */}}
 {{- $alt := default "no alt parameter set!" .alt -}}
 {{- $holder := default "GIP" .holder -}}
 {{- $hint := default "photo" .hint -}}
@@ -50,7 +50,7 @@ Variables - Map from parameters
 Calculated - Keep in partial
 **************************************/}}
 {{- $imgBd5 := md5 $src -}}
-{{ $ratioID := print "-rt" (replace $ratio "/" "_") }}
+{{- $ratioID := print "-rt" (replace $ratio "/" "_") -}}
 {{- $divClass := print "is-relative image bg-center imgB-" $imgBd5 $ratioID "-" $holder -}}
 
 {{/*
@@ -61,7 +61,20 @@ of browsers that don't understand the HTML `picture` tag.
 {{- $actualImg := $src.Process (printf "%s %s %s %s" $method $initDimen "jpg Center" $filter) -}}
 
 <div class="{{ $divClass }}">
-
+  {{ partial "dbg" (dict
+    "method" $method
+    "sizes" $respSizes
+    "alt" $alt
+    "holder" $holder
+    "hint" $hint
+    "filter" $filter
+    "imgBd5" $imgBd5
+    "ratioID" $ratioID
+    "divClass" $divClass
+    "readingTime" $readingTime
+    "srcSets" $respSrcSets
+    "src" $src
+  ) }}
 
   {{/*
   Now we'll build the `picture` which modern browsers use to decide

@@ -2,25 +2,26 @@
   but if bundle type is branch then find first page
   image resource for page in paginated list
 */}}
-{{ $pageImages := .Resources.ByType "image" }}
-{{ if eq .BundleType "branch" }}
-  {{ $pages := (where $.Site.RegularPages "Section" "articles").ByDate }}
-  {{ $paginate := (.Page.Paginate $pages) }}
-  {{ $headerImages := slice }}
 
-  {{ range $paginate.Pages }}
-    {{ with .Resources.GetMatch .Params.image.src }}
-      {{ $headerImages = $headerImages | append (slice .) }}
-    {{ end }}
-  {{ end }}
-  {{ $pageImages = $headerImages }}
-{{ end }}
+{{- $pageImages := .Resources.ByType "image" -}}
+{{- if eq .BundleType "branch" -}}
+  {{- $pages := (where $.Site.RegularPages "Section" "articles").ByDate -}}
+  {{- $paginate := (.Page.Paginate $pages) -}}
+  {{- $headerImages := slice -}}
+  {{- range $paginate.Pages -}}
+    {{- with .Resources.GetMatch .Params.image.src -}}
+      {{- $headerImages = $headerImages | append (slice .) -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $pageImages = $headerImages -}}
+{{- end -}}
 
 {{- with $pageImages }}
 <style media="screen" data-type="image-placeholders">
   {{- range . -}}
 		{{- $src := . -}}
 		{{- $imgBd5 := md5 .Name -}}
+
     {{- range $ratio, $imgSizes := $.Site.Params.imaging.aspectRatios }}
       {{- $BkgdStyleEnd := printf "%s %s%s" "; background-size: cover; background-repeat: no-repeat; aspect-ratio:" $ratio ";" -}}
       {{- $GIP_colors := $src.Colors -}}
