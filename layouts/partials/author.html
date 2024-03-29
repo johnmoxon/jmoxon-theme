@@ -11,7 +11,7 @@
             {{ .Page.Content }}
             {{ with .SourceKind }}
             {{ if eq . "taxonomy" }}
-            <a href="{{ $.Page.Permalink }}" class="button">Read {{ $.Page.Params.name }}'s articles</a>
+            <a href="{{ $.Page.RelPermalink }}" class="button">Read {{ $.Page.Params.name }}'s articles</a>
             {{ end }}
             {{ end }}
         </div>

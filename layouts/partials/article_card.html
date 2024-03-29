@@ -1,6 +1,7 @@
 <div class="card is-shadowless">
     <div class="columns is-gapless">
         <div class="column">
+          <a href="{{ .Page.RelPermalink }}">
             <div class="card-image">
                 {{ partial "images/image" (dict
                   "Page" .Page
@@ -10,6 +11,7 @@
                   "ratio" "1/1"
                 ) }}
             </div>
+          </a>
         </div>
         <div class="column is-two-thirds">
             <div class="card-content">

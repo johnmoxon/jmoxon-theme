@@ -3,13 +3,13 @@
     <ul>
         {{/*  Get the home page  */}}
         {{- range .Ancestors.Reverse |first 1 }}
-        <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+        <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
         {{- end }}
-        
+
         {{/*  If a category exists include */}}
         {{ with .GetTerms "categories" }}
         {{ range . }}
-        <li><a href="{{ .Permalink }}">{{strings.Title .Title }}</a></li>
+        <li><a href="{{ .RelPermalink }}">{{strings.Title .Title }}</a></li>
         {{ end }}
         {{ end }}
 

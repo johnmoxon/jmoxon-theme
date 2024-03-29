@@ -2,17 +2,16 @@
 
 {{- /*
   Renders a menu for the given menu ID.
-  
+
   @context {page} page The current page.
   @context {string} menuID The menu ID.
-  
+
   @example: {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
   */}}
-  
+
   {{- $page := .page }}
   {{- $menuID := .menuID }}
   {{- $social := .social }}
-  {{- $BaseURL := .BaseURL }}
 
 
 {{- with index site.Menus $menuID }}
@@ -31,7 +30,7 @@
         {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
 
         <div class="navbar-item sharing-utility">
-        {{ partial "social_icon_links" (dict "social" $social "Page" $page "BaseURL" $BaseURL) }}
+        {{ partial "social_icon_links" (dict "social" $social "Page" $page) }}
         </div>
       </div>
       <div class="navbar-end"></div>
@@ -60,7 +59,7 @@
     {{- end }}
 
     {{/*  <li>  */}}
-      {{/*  <a class="navbar-item{% if page.url == item.link %} is-active{% endif %}" 
+      {{/*  <a class="navbar-item{% if page.url == item.link %} is-active{% endif %}"
           href="{{ item.link }}">
           {{ item.name }}
         </a>  */}}

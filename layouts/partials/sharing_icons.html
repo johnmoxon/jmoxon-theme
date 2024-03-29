@@ -1,21 +1,21 @@
 <span class="icons is-pulled-right">
     <span class="is-size-7">share </span>
-    
+
     {{ with .Params.Tags }}
     <span class="icon">
-        <a href='https://twitter.com/intent/tweet?url={{ $.Permalink }}&text={{ (default "summary needs to be added" $.Params.Summary) | truncate 130 }}&hashtags={{ delimit . ","}}'>
+        <a href='https://twitter.com/intent/tweet?url={{ $.RelPermalink }}&text={{ (default "summary needs to be added" $.Params.Summary) | truncate 130 }}&hashtags={{ delimit . ","}}'>
             {{/*  <i class="fab fa-twitter"></i>  */}}
             <i class="fa-brands fa-x-twitter"></i>
         </a>
     </span>
     {{ end }}
     <span class="icon">
-        <a href="https://www.facebook.com/sharer.php?u={{ .Permalink }}" title="Share with facebook">
+        <a href="https://www.facebook.com/sharer.php?u={{ .RelPermalink }}" title="Share with facebook">
             <i class="fa-brands fa-facebook"></i>
         </a>
     </span>
     <span class="icon">
-        <a href='https://www.linkedin.com/shareArticle?url={{ .Permalink }}&mini=true&title={{ .Title }}&summary={{ .Params.Summary }}&source={{ .Site.Author.name }} | {{ .Title }}'
+        <a href='https://www.linkedin.com/shareArticle?url={{ .RelPermalink }}&mini=true&title={{ .Title }}&summary={{ .Params.Summary }}&source={{ .Site.Author.name }} | {{ .Title }}'
             title="Share with facebook">
             <i class="fa-brands fa-linkedin"></i>
         </a>

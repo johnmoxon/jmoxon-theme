@@ -5,12 +5,12 @@
 {{ if or ($paginate.HasPrev) ($paginate.HasNext) }}
 <nav class="pagination" role="navigation" aria-label="pagination">
     {{ if $paginate.HasPrev }}
-    <a class="pagination-previous" href="{{ .Permalink }}page/{{ $paginate.Prev.PageNumber }}/">&larr; newer posts </a>
+    <a class="pagination-previous" href="{{ .RelPermalink }}page/{{ $paginate.Prev.PageNumber }}/">&larr; newer posts </a>
     {{ else }}
     <a class="pagination-previous is-disabled">&larr; newer posts </a>
     {{ end }}
     {{ if $paginate.HasNext }}
-    <a class="pagination-next" href="{{ .Permalink }}page/{{ $paginate.Next.PageNumber }}/">older posts &rarr;</a>
+    <a class="pagination-next" href="{{ .RelPermalink }}page/{{ $paginate.Next.PageNumber }}/">older posts &rarr;</a>
     {{ else }}
     <a class="pagination-next is-disabled">older posts &rarr;</a>
     {{ end }}
