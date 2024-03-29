@@ -1,20 +1,9 @@
 {{ define "main" }}
 <div class="container">
   <section class="section">
-    <div class="columns">
-      <div class="column is-two-thirds is-align-self-flex-start">
-        <div class="article-list">
-          <h2 class="title is-h2 is-uppercase">{{ .Params.name }}'s Articles</h2>
-          {{ range ( .Paginate .Data.Pages ).Pages }}
-          {{ partial "article_card" (dict "Page" . "SourceType" $.Type ) }}
-          {{ end }}
-        </div>
-      </div>
-      <div class="column is-align-self-flex-start">
-        {{ partial "author" (dict "Page" . "SourceKind" $.Kind ) }}
-      </div>
-    </div>
-    {{ partial "pagination_links" . }}
+      <h2 class="title is-h2 is-uppercase">{{ .Params.name }}'s Articles</h2>
+      {{ $pages := ( .Paginate .Data.Pages ).Pages }}
+      {{ partial "posts_list" (dict "Page" . "FilteredPages" $pages) }}
   </section>
 </div>
 {{ end }}
