@@ -1,0 +1,6 @@
+{{- if ne hugo.Environment "production"  }}
+{{/*  Expects context to be passed  */}}
+<script>
+  console.log('Hugo Debug: ', JSON.parse({{ jsonify . }}))
+</script>
+{{ end -}}
