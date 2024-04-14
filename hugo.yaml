@@ -1,6 +1,7 @@
 baseURL: 'https://jmoxon.net/'
 languageCode: en-us
 title: 'Theme site'
+paginate: 10
 menus:
   main:
     - name: Home
@@ -37,7 +38,6 @@ params:
           - "(min-width: 1024px) 26vw"
           - "(min-width: 768px) 30vw"
           - "90vw"
-
   author:
     name: John
     social:
@@ -88,6 +88,7 @@ module:
 
 
 # Dev mounts - Merge real site content with
+# !Important - remove before push
   # mounts:
   #   - source: ../jmoxon.net/content
   #     target: content
