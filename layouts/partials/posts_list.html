@@ -1,30 +1,26 @@
+{{ $paginateObj := .PaginateObj }}
 <div class="posts-list">
-    {{/* TODO: Convert this to use mainSections config param */}}
-    {{ $pages := .FilteredPages }}
-    {{ $pages = $pages.ByDate }}
-    {{ $paginate := (.Page.Paginate $pages) }}
 
+  {{ if $paginateObj.Pages }}
+  {{ if and (eq $paginateObj.PageNumber 1) (eq .Page.Kind "home") }}
+  {{ $highlight := (index $paginateObj.Pages 0) }}
+  {{ partial "article_highlight" (dict
+    "Page" $highlight.Page
+    "SourceType" $highlight.Page.Type
+  ) }}
+  {{ end }}
+  {{ end }}
 
-    {{/* Show article highlight */}}
-    {{/* TODO: convert this to show pinned posts */}}
-    {{ if and (eq $paginate.PageNumber 1) (eq .Page.Kind "home") }}
-    {{ range $index, $element := $paginate.Pages | first 1 }}
-    {{ partial "article_highlight" (dict "Page" .Page "SourceType" .Page.Type ) }}
+  {{/* cycle through paginated articles */}}
+  <div class="article-list">
+    {{ range $index, $element := $paginateObj.Pages }}
+    {{ if or (gt $index 0) (ne $paginateObj.PageNumber 1) (ne $.Page.Kind "home") }}
+    {{ partial "article_card" (dict "Page" .Page "SourceType" .Page.Type ) }}
     {{ end }}
     {{ end }}
+  </div>
 
-    {{/* cycle through paginated articles */}}
-    {{/*  <section class="section">  */}}
-        <div class="article-list">
-            {{ range $index, $element := $paginate.Pages }}
-            {{ if or (gt $index 0) (ne $paginate.PageNumber 1) (ne $.Page.Kind "home") }}
-            {{ partial "article_card" (dict "Page" .Page "SourceType" .Page.Type ) }}
-            {{ end }}
-            {{ end }}
-        </div>
+  {{/* Include the pagination links */}}
+  {{ partial "pagination_links" .Page }}
 
-        {{/* Include the pagination links */}}
-        {{ partial "pagination_links" .Page }}
-
-    {{/*  </section>  */}}
 </div>

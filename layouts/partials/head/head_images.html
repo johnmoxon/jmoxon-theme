@@ -5,10 +5,8 @@
 
 {{- $pageImages := .Resources.ByType "image" -}}
 {{- if eq .BundleType "branch" -}}
-  {{- $pages := (where $.Site.RegularPages "Section" "articles").ByDate -}}
-  {{- $paginate := (.Page.Paginate $pages) -}}
   {{- $headerImages := slice -}}
-  {{- range $paginate.Pages -}}
+  {{- range (where .Site.RegularPages "Section" "articles") -}}
     {{- with .Resources.GetMatch .Params.image.src -}}
       {{- $headerImages = $headerImages | append (slice .) -}}
     {{- end -}}

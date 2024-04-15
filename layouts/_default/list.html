@@ -20,12 +20,16 @@
 
     {{ with .Content }}
     <div class="content">
-      {{.}}
+      {{ . }}
     </div>
     {{ end }}
 
-    {{ $pages := .Pages }}
-    {{ partial "posts_list" (dict "Page" . "FilteredPages" $pages) }}
+    {{/*  include posts assigned to this section  */}}
+    {{ partial "posts_list" (dict
+    "Page" .Page
+    "PaginateObj" .Paginator
+    ) }}
+
   </section>
 </div>
 {{ end }}
