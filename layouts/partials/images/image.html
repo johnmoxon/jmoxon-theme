@@ -61,20 +61,6 @@ of browsers that don't understand the HTML `picture` tag.
 {{- $actualImg := $src.Process (printf "%s %s %s %s" $method $initDimen "jpg Center" $filter) -}}
 
 <div class="{{ $divClass }}">
-  {{ partial "dbg" (dict
-    "method" $method
-    "sizes" $respSizes
-    "alt" $alt
-    "holder" $holder
-    "hint" $hint
-    "filter" $filter
-    "imgBd5" $imgBd5
-    "ratioID" $ratioID
-    "divClass" $divClass
-    "readingTime" $readingTime
-    "srcSets" $respSrcSets
-    "src" $src
-  ) }}
 
   {{/*
   Now we'll build the `picture` which modern browsers use to decide
