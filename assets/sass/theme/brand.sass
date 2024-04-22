@@ -50,11 +50,16 @@ a.is-link,
     color: $primary
 
 
-a.is-link:hover, 
+a.is-link:hover,
 article .content a:hover
     text-decoration: underline
     color: $primary
-    
+
+header
+    section.section
+        @include for-phone-only
+            padding-top: 3.2rem
+
 blockquote
     background-color: white
 
@@ -85,8 +90,6 @@ blockquote
             // @extend .pt-0
 
 
-
-
 ::selection
     text-shadow: none
     background: $lightgreentext
@@ -104,9 +107,9 @@ img::-moz-selection
     background: 0 0
 
 // Navbar
-@media (max-width: 1023px)
-    .navbar
-        position: absolute !important
-        top: 0px
-        right: 0
-        width: 100%
+// @media (max-width: 1023px)
+//     .navbar
+//         position: absolute !important
+//         top: 0px
+//         right: 0
+//         width: 100%
