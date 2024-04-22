@@ -1,6 +1,6 @@
 {{ define "main" }}
 <div class="container">
-  <section class="section ml-5 mr-5">
+  <section class="section">
     {{ with .Content }}
     <div class="content">
       {{ . }}
@@ -14,6 +14,7 @@
     {{ partial "posts_list" (dict
       "Page" .Page
       "PaginateObj" $paginate
+      "IsPage" .IsPage
     ) }}
 
   </section>

@@ -1,7 +1,8 @@
-<div class="featured-post">
+
+<div class="featured-post has-border">
     <a href="{{ .Page.RelPermalink }}">
         <div class="card is-shadowless">
-            <h2 class="title is-size-3 is-size-5-mobile padded-multiline"><span>{{ .Page.LinkTitle }}</span></h2>
+            <h2 class="title is-size-3 is-size-4-mobile padded-multiline"><span>{{ .Page.LinkTitle }}</span></h2>
             <div class="card-image image">
               {{ partial "images/image" (dict
                 "Page" .Page
@@ -10,14 +11,15 @@
                 "readingTime" .Page.ReadingTime
               ) }}
             </div>
-            {{/* {{ with .Page.Params.Summary }} */}}
             <div class="card-content">
                 <div class="content mb-3">
                     <a href="{{ .Page.RelPermalink }}" class="has-text-black">
                         {{ .Page.Params.Summary }}
-                    </a>&nbsp;<a href="{{ .Page.RelPermalink }}" class="is-link">read more&hellip;</a>
+                    </a><a href="{{ .Page.RelPermalink }}" class="is-link">read more&hellip;</a>
                 </div>
-                {{ partial "tags" .Page }}
+                {{ partial "tags" (dict
+                  "Page" .Page
+                ) }}
             </div>
         </div>
     </a>

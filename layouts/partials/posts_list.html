@@ -7,6 +7,7 @@
   {{ partial "article_highlight" (dict
     "Page" $highlight.Page
     "SourceType" $highlight.Page.Type
+    "IsPage" .Page.IsPage
   ) }}
   {{ end }}
   {{ end }}
