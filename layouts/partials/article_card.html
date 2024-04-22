@@ -1,34 +1,34 @@
 <div class="card is-shadowless">
-    <div class="columns is-gapless">
-        <div class="column">
+  <div class="card-content">
+      <div class="media">
+        <div class="media-content">
+          {{- with .Page.ReadingTime }}
+          <span class="is-size-7 pb-3 is-block">{{ printf "%d mins read" . }}</span>
+          {{ end -}}
+          <h2 class="title is-size-4 is-size-5-mobile is-family-secondary"><a href="{{ .Page.RelPermalink }}" class="has-text-black">{{ .Page.LinkTitle }}</a></h2>
+          <div class="content">
+            <a href="{{ .Page.RelPermalink }}" class="has-text-black">
+                {{ .Page.Params.Summary }}
+            </a>&nbsp;
+
+            <a href="{{ .Page.RelPermalink }}" class="is-link is-button-mobile">read more&hellip;</a>
+            {{ partial "tags" (dict
+            "Page" .Page
+            ) }}
+          </div>
+        </div>
+        <div class="media-right">
           <a href="{{ .Page.RelPermalink }}">
-            <div class="card-image">
-                {{ partial "images/image" (dict
-                  "Page" .Page
-                  "src" (.Page.Resources.GetMatch .Page.Params.Image.src)
-                  "alt" .Page.Params.Image.alt
-                  "readingTime" .Page.ReadingTime
-                  "ratio" "1/1"
-                ) }}
-            </div>
+            {{ partial "images/image" (dict
+            "Page" .Page
+            "src" (.Page.Resources.GetMatch .Page.Params.Image.src)
+            "alt" .Page.Params.Image.alt
+            "ratio" "1/1"
+            "customClasses" "is-square"
+            ) }}
           </a>
         </div>
-        <div class="column is-two-thirds">
-            <div class="card-content">
-                <div class="media">
-                    <div class="media-content">
-                        <h2 class="title is-4"><a href="{{ .Page.RelPermalink }}" class="has-text-black">{{ .Page.LinkTitle }}</a></h2>
-                    </div>
-                </div>
-
-                <div class="content">
-                    <a href="{{ .Page.RelPermalink }}" class="has-text-black">
-                        {{ .Page.Params.Summary }}
-                    </a>&nbsp;<a href="{{ .Page.RelPermalink }}" class="is-link">read more&hellip;</a>
-                    {{ partial "tags" .Page }}
-                </div>
-            </div>
-        </div>
-    </div>
+      </div>
+  </div>
 </div>
 <hr>

@@ -1,5 +1,23 @@
-.card
+.featured-post
     border: 1px solid $black
+    @include for-phone-only
+        border: none
+.card
+
+    .media-right
+        width: 170px
+        @include for-phone-only
+            width: 70px
+
+
+    .card-content
+        @include for-phone-only
+            padding: 1rem 0 0 0 !important
+        //     padding:0 !important
+
+        // .is-button-mobile
+
+
 
     .padded-multiline
         line-height: 1.8
@@ -7,9 +25,15 @@
         z-index: 10
         padding: 0.5rem 3rem 0.5rem 0.5rem
 
+        @include for-phone-only
+            position: relative
+            padding: 0 0 0 0
+            line-height: 1
+
         @include for-tablet-portrait-up
             padding-top: 4rem
-    
+
+
 
         span
             background-color: $black
@@ -20,6 +44,13 @@
             /* Needs prefixing */
             -webkit-box-decoration-break: clone
             box-decoration-break: clone
+
+            @include for-phone-only
+                background-color: unset
+                color: $black
+                font-family: $family-secondary
+                -webkit-box-decoration-break: none
+                box-decoration-break: none
 
 .card.has-min-height,
 .box.has-min-height

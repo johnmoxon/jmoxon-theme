@@ -51,7 +51,12 @@ Calculated - Keep in partial
 **************************************/}}
 {{- $imgBd5 := md5 $src -}}
 {{- $ratioID := print "-rt" (replace $ratio "/" "_") -}}
-{{- $divClass := print "is-relative image bg-center imgB-" $imgBd5 $ratioID "-" $holder -}}
+
+{{- $fixedClasses := "is-relative image bg-center" -}}
+{{- $customClasses := default "" .customClasses -}}
+{{- $placeHolderClass := (print "imgB-" $imgBd5 $ratioID "-" $holder) -}}
+{{- $divClass := printf "%s %s %s" $fixedClasses $customClasses $placeHolderClass -}}
+{{/*  {{- $divClass := print "is-relative image bg-center imgB-" $imgBd5 $ratioID "-" $holder -}}  */}}
 
 {{/*
 Then, we create a 640-pixel-wide JPG of the image.

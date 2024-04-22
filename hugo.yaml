@@ -32,12 +32,12 @@ params:
           - "90vw"
       '1/1':
         srcset:
+          - [70, 70]
+          - [160, 160]
           - [320, 320]
-          - [640, 640]
         sizes:
-          - "(min-width: 1024px) 26vw"
-          - "(min-width: 768px) 30vw"
-          - "90vw"
+          - "(min-width: 768px) 20vw"
+          - "70px"
   author:
     name: John
     social:
