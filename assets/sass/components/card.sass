@@ -2,21 +2,21 @@
     border: 1px solid $black
     @include for-phone-only
         border: none
+        .card
+            .card-content
+                padding: 1rem 0 0 0 !important
+
+.article-list
+    .card
+        .card-content
+            padding: 1rem 0 0 0 !important
+
 .card
 
     .media-right
         width: 170px
         @include for-phone-only
             width: 70px
-
-
-    .card-content
-        @include for-phone-only
-            padding: 1rem 0 0 0 !important
-        //     padding:0 !important
-
-        // .is-button-mobile
-
 
 
     .padded-multiline
@@ -51,6 +51,7 @@
                 font-family: $family-secondary
                 -webkit-box-decoration-break: none
                 box-decoration-break: none
+
 
 .card.has-min-height,
 .box.has-min-height
