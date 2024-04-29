@@ -6,10 +6,16 @@
         <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
         {{- end }}
 
+        {{/*  on a term page get taxonomy list page  */}}
+        {{ if eq .Kind "term" }}
+        {{ $term := $.Site.GetPage (printf "/%s/" .Type ) }}
+        {{ with $term }}<li><a href="{{ .RelPermalink }}">{{ strings.Title .Title }}</a></li>{{ end }}
+        {{ end }}
+
         {{/*  If a category exists include */}}
         {{ with .GetTerms "categories" }}
-        {{ range . }}
-        <li><a href="{{ .RelPermalink }}">{{strings.Title .Title }}</a></li>
+        {{ range . | first 1 }}
+        <li><a href="{{ .RelPermalink }}">{{ strings.Title .Title }}</a></li>
         {{ end }}
         {{ end }}
 
