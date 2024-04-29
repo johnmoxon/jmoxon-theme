@@ -3,8 +3,6 @@
   {{ partial "images/figure" (dict "Page" . "src" "some_image.jpg")}}
 
 */}}
-{{/*  ^^^{{ range $k, $v := .Page.Site.Params.imaging.aspectRatios }}{{$k}}_-_{{$v}}{{ end }}^^^
-***{{ index .Page.Site.Params.imaging.aspectRatios "3/2" }}***  */}}
 
 {{/* Map the standard figure shortcode parameters */}}
 {{- $figureClass := default nil .class -}}
