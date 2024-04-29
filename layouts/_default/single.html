@@ -10,7 +10,6 @@
 
       {{ partial "sharing_icons.html" . }}
 
-
       {{ partial "images/figure" (dict "Page" .
         "src" (.Page.Resources.GetMatch .Params.Image.src)
         "ratio" "3/2"
@@ -26,7 +25,6 @@
     </article>
 
     {{ partial "tags" . }}
-
 
     {{ partial "author_bio" . }}
   </section>
