@@ -8,7 +8,7 @@
     {{ end }}
 
     {{ $pages := where .Site.RegularPages "Section" "articles" }}
-    {{ $pages = $pages.ByDate }}
+    {{ $pages = $pages.ByDate.Reverse }}
     {{ $paginate := .Paginate $pages }}
 
     {{ partial "posts_list" (dict
