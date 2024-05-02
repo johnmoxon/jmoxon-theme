@@ -1,6 +1,6 @@
 <span class="icons is-pulled-right">
     <span class="is-size-7">share </span>
-    
+
     {{ with .Params.Tags }}
     <span class="icon">
         <a href='https://twitter.com/intent/tweet?url={{ $.Permalink }}&text={{ (default "summary needs to be added" $.Params.Summary) | truncate 130 }}&hashtags={{ delimit . ","}}'>

@@ -1,9 +1,10 @@
+
 {{ $taxonomy := "tags" }}
-{{ with .Param $taxonomy }}
-<nav class="tags pt-3">
+{{ with .Page.Param $taxonomy }}
+<nav class="tags pt-3{{ if not $.IsPage }} is-hidden-mobile{{ end }}">
     {{ range $index, $tag := . }}
-    {{ with $.Site.GetPage (printf "/%s/%s" $taxonomy $tag) -}}
-    <a class="tag" href="{{ .Permalink }}">#{{ $tag | urlize }}</a>
+    {{ with $.Page.Site.GetPage (printf "/%s/%s" $taxonomy $tag) -}}
+    <a class="tag" href="{{ .RelPermalink }}">#{{ $tag | urlize }}</a>
     {{- end -}}
     {{- end -}}
 </nav>

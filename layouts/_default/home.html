@@ -1,18 +1,22 @@
 {{ define "main" }}
-
 <div class="container">
-  <section class="section ml-5 mr-5">
+  <section class="section">
     {{ with .Content }}
     <div class="content">
       {{ . }}
     </div>
     {{ end }}
 
-    {{ $pages := where $.Site.RegularPages "Section" "articles" }}
-    {{ partial "posts_list" (dict "Page" . "FilteredPages" $pages) }}
+    {{ $pages := where .Site.RegularPages "Section" "articles" }}
+    {{ $pages = $pages.ByDate.Reverse }}
+    {{ $paginate := .Paginate $pages }}
+
+    {{ partial "posts_list" (dict
+      "Page" .Page
+      "PaginateObj" $paginate
+      "IsPage" .IsPage
+    ) }}
 
   </section>
-
-
 </div>
 {{ end }}

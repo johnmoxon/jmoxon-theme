@@ -18,9 +18,10 @@ large number of original images.)
 {{ $initYDimen := math.Ceil (mul (div $initXDimen $ratioDict.x) $ratioDict.y) }}
 {{ $initDimen := string (printf "%sx%s" (string $initXDimen) (string $initYDimen)) }}
 {{/*  {{- $respSizes := (index .Page.Site.Params.imaging.aspectRatios $ratio) -}}  */}}
-{{- $respImages := (index .Page.Site.Params.imaging $ratio) -}}
+{{- $respImages := (index .Page.Site.Params.imaging.aspectRatios $ratio) -}}
 {{- $respSrcSets := (index $respImages "srcset") -}}
 {{- $respSizes := default (delimit (index $respImages "sizes") ", ") .sizes -}}
+
 
 {{/*
 The styling in $imgClass, below, makes an image fill the container
@@ -35,64 +36,92 @@ Feel free to adjust your CSS/SCSS as desired.
 {{/***********************************
 Variables - Map from parameters
 **************************************/}}
-{{- $src := .src -}}{{/* REQUIRED */}}
+{{- $src := .src -}} {{/* REQUIRED */}}
 {{- $alt := default "no alt parameter set!" .alt -}}
 {{- $holder := default "GIP" .holder -}}
 {{- $hint := default "photo" .hint -}}
 {{- /* ^^ applicable only to webp: https://gohugo.io/content-management/image-processing/#hint */ -}}
 {{- $filter := default false .filter -}}
 
-{{/*  Required for use in posts list - breaks do one thing well  */}}
+{{/* Required for use in posts list - breaks do one thing well */}}
 {{- $readingTime := default nil .readingTime -}}
 
+{{/* */}}
 
-{{/***********************************
-Calculated - Keep in partial
-**************************************/}}
-{{- $imgBd5 := md5 $src -}}
-{{ $ratioID := print "-rt" (replace $ratio "/" "_") }}
-{{- $divClass := print "is-relative image bg-center imgB-" $imgBd5 $ratioID "-" $holder " " .class -}}
-
-{{/*
-Then, we create a 640-pixel-wide JPG of the image.
-This will serve as the "fallback" image for that tiny percentage
-of browsers that don't understand the HTML `picture` tag.
-*/}}
-{{- $actualImg := $src.Process (printf "%s %s %s %s" $method $initDimen "jpg Center" $filter) -}}
-
-<div class="{{ $divClass }}">
-
+{{ with $src }}
+  {{/***********************************
+  Calculated - Keep in partial
+  **************************************/}}
+  {{- $imgBd5 := md5 $src -}}
+  {{- $ratioID := print "-rt" (replace $ratio "/" "_") -}}
+  {{- $fixedClasses := "is-relative image bg-center" -}}
+  {{- $customClasses := default "" $.customClasses -}}
+  {{- $placeHolderClass := (print "imgB-" $imgBd5 $ratioID "-" $holder) -}}
+  {{- $divClass := printf "%s %s %s %s" $fixedClasses $customClasses $placeHolderClass $.class -}}
+  {{/* {{- $divClass := print "is-relative image bg-center imgB-" $imgBd5 $ratioID "-" $holder -}} */}}
 
   {{/*
-  Now we'll build the `picture` which modern browsers use to decide
-  which image, and which format thereof, to show. Remember to put
-  `webp` first, since the browser will use the first format it
-  **can** use, and WebP files usually are smaller. After WebP,
-  the fallback is the universally safe JPG format.
+  Then, we create a 640-pixel-wide JPG of the image.
+  This will serve as the "fallback" image for that tiny percentage
+  of browsers that don't understand the HTML `picture` tag.
   */}}
-  <picture>
-    <source type="image/webp" srcset='
-      {{- with $respSrcSets -}}
-        {{- range $i, $e := . -}}
-          {{- if ge $src.Width . -}}
-            {{- if $i }}, {{ end -}}
-            {{- ($src.Process (printf "%s %s %s %s %s %s" $method (delimit . "x") "webp" "Center" $hint $filter) ).RelPermalink }} {{ index . 0 }}w
+  {{- $actualImg := $src.Process (printf "%s %s %s %s" $method $initDimen "jpg Center" $filter) -}}
+
+  <div class="{{ $divClass }}">
+
+    {{/*
+    Now we'll build the `picture` which modern browsers use to decide
+    which image, and which format thereof, to show. Remember to put
+    `webp` first, since the browser will use the first format it
+    **can** use, and WebP files usually are smaller. After WebP,
+    the fallback is the universally safe JPG format.
+    */}}
+    <picture>
+      <source type="image/webp" srcset='
+        {{- with $respSrcSets -}}
+          {{- range $i, $e := . -}}
+            {{- if ge $src.Width . -}}
+              {{- if $i }}, {{ end -}}
+              {{- ($src.Process (printf "%s %s %s %s %s %s" $method (delimit . "x") "webp" "Center" $hint $filter) ).RelPermalink }} {{ index . 0 }}w
+            {{- end -}}
           {{- end -}}
-        {{- end -}}
-      {{- end -}}' sizes="{{ $respSizes }}" />
-    <source type="image/jpeg" srcset='
-      {{- with $respSrcSets -}}
-        {{- range $i, $e := . -}}
-          {{- if ge $src.Width . -}}
-            {{- if $i }}, {{ end -}}
-            {{- ($src.Process (printf "%s %s %s %s %s" $method (delimit . "x") "jpg" "Center" $filter) ).RelPermalink }} {{ index . 0 }}w
+        {{- end -}}' sizes="{{ $respSizes }}" />
+      <source type="image/jpeg" srcset='
+        {{- with $respSrcSets -}}
+          {{- range $i, $e := . -}}
+            {{- if ge $src.Width . -}}
+              {{- if $i }}, {{ end -}}
+              {{- ($src.Process (printf "%s %s %s %s %s" $method (delimit . "x") "jpg" "Center" $filter) ).RelPermalink }} {{ index . 0 }}w
+            {{- end -}}
           {{- end -}}
-        {{- end -}}
-      {{- end -}}' sizes="{{ $respSizes }}" />
-    <img class="{{ $imgClass }}" src="{{ $actualImg.RelPermalink }}" width="{{ $src.Width }}" height="{{ $src.Height }}"
-      alt="{{ $alt }}" title="{{ $alt }}" loading="lazy" />
-  </picture>
-  {{- with $readingTime }}
-  <span class="tag is-white is-ontop-right">{{ printf "%d mins read" . }}</span>
-  {{ end -}}
-</div>
+        {{- end -}}' sizes="{{ $respSizes }}" />
+      <img class="{{ $imgClass }}" src="{{ $actualImg.RelPermalink }}" width="{{ $src.Width }}" height="{{ $src.Height }}"
+        alt="{{ $alt }}" title="{{ $alt }}" loading="lazy" />
+    </picture>
+    {{- with $readingTime }}
+    <span class="tag is-white is-ontop-right">{{ printf "%d mins read" . }}</span>
+    {{ end -}}
+  </div>
+{{ else }}
+
+  {{/*  Image is not available, serve a placeholder  */}}
+  {{ $initXDimen := 1000 }}
+  {{ $initYDimen := math.Ceil (mul (div $initXDimen $ratioDict.x) $ratioDict.y) }}
+  {{ $initDimen := string (printf "%sx%s" (string $initXDimen) (string $initYDimen)) }}
+  <img src="https://placehold.co/{{$initDimen}}?text=no%20img" alt="No image set">
+{{ end }}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

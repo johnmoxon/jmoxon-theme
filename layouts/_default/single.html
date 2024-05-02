@@ -1,17 +1,7 @@
 {{ define "main" }}
 
-<span class="is-block has-text-centered is-hidden-desktop">
-  <span class="icon">
-    <i class="fas fa-infinity"></i>
-    {{/* <i class="fas fa-paper-plane"></i> */}}
-    {{/* <i class="fas fa-leaf"></i> */}}
-    {{/* <i class="fas fa-grip-lines"></i> */}}
-    {{/* <i class="fas fa-mug-hot"></i> */}}
-  </span>
-</span>
-
 <div class="container">
-  <section class="section ml-5 mr-5" id="main_article">
+  <section class="section" id="main_article">
     {{ partial "breadcrumbs" . }}
     <article class="pb-4">
       <h1 class="title is-2 is-family-secondary" id="article_heading">{{ .Title }}</h1>
@@ -19,7 +9,6 @@
       <span class="is-size-7 has-text-black">{{ printf "%d mins read" .ReadingTime }}</span>
 
       {{ partial "sharing_icons.html" . }}
-
 
       {{ partial "images/figure" (dict "Page" .
         "src" (.Page.Resources.GetMatch .Params.Image.src)
@@ -36,7 +25,6 @@
     </article>
 
     {{ partial "tags" . }}
-
 
     {{ partial "author_bio" . }}
   </section>

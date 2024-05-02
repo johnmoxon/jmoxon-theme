@@ -1,0 +1,8 @@
+{{ $label := .label }}
+{{ $obj := .obj }}
+{{- if ne hugo.Environment "production"  }}
+{{/*  Expects context to be passed  */}}
+<script>
+  console.log('{{ $label }}', JSON.parse({{ jsonify $obj }}))
+</script>
+{{ end -}}

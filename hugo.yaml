@@ -1,6 +1,7 @@
 baseURL: 'https://jmoxon.net/'
 languageCode: en-us
 title: 'Theme site'
+paginate: 10
 menus:
   main:
     - name: Home
@@ -20,36 +21,27 @@ params:
   imaging:
     aspectRatios:
       '3/2':
-        - [320, 213]
-        - [640, 427]
-        - [1024, 683]
-        - [1280, 853]
-        - [1420, 947]
+        srcset:
+          - [320, 213]
+          - [640, 427]
+          - [1024, 683]
+          - [1280, 853]
+          - [1420, 947]
+        sizes:
+          - "(min-width: 1024px) 60vw"
+          - "90vw"
       '1/1':
-        - [320, 320]
-        - [640, 640]
-    '3/2':
-      srcset:
-        - [320, 213]
-        - [640, 427]
-        - [1024, 683]
-        - [1280, 853]
-        - [1420, 947]
-      sizes:
-        - "(min-width: 1024px) 60vw"
-        - "90vw"
-    '1/1':
-      srcset:
-        - [320, 320]
-        - [640, 640]
-      sizes:
-        - "(min-width: 1024px) 26vw"
-        - "(min-width: 768px) 30vw"
-        - "90vw"
-
+        srcset:
+          - [70, 70]
+          - [160, 160]
+          - [320, 320]
+        sizes:
+          - "(min-width: 768px) 20vw"
+          - "70px"
   author:
     name: John
     social:
+    # Move to params - Author is deprecates
       linkedin:
         user: johnmoxon
       twitter:
@@ -59,7 +51,7 @@ imaging:
   bgColor: '#ffffff'
   hint: photo
   quality: 80
-  resampleFilter: box
+  resampleFilter: Box
   anchor: "Center"
 
 taxonomies:
@@ -96,6 +88,7 @@ module:
 
 
 # Dev mounts - Merge real site content with
+# !Important - remove before push
   # mounts:
   #   - source: ../jmoxon.net/content
   #     target: content

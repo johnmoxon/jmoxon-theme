@@ -1,14 +1,16 @@
 .navbar
-@include has-mobile-navbar
-    position: absolute !important
-    top: 0px
-    right: 0
-    width: 100%
+    @include has-mobile-navbar
+        position: absolute !important
+        top: 0px
+        right: 0
+        width: 100%
 
 .navbar-menu
-    @include has-standard-navbar
-    border: solid $black
+    border: 1px solid $black
     border-width: 1px 0
+    @include has-mobile-navbar
+        padding-bottom: 0 !important
+        padding-top: 0 !important
 
     .navbar-item:first-child
         border-left: 1px solid $black
@@ -22,8 +24,8 @@
 
     div.sharing-utility
         border-right: 1px solid $black;
-        padding-left: $navbar-padding-horizontal - 1rem;
-        padding-right: $navbar-padding-horizontal - 1rem;
+        padding-left: $navbar-padding-horizontal - 0.3rem
+        padding-right: $navbar-padding-horizontal - 0.3rem
         padding-top: 0.8rem
         padding-bottom: 0.8rem
 

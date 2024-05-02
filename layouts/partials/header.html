@@ -1,8 +1,18 @@
 <!-- Header section -->
 <section class="section">
-    <div class="container has-text-centered">
-      <h2 class="subtitle is-size-4 is-size-6-mobile is-spaced is-uppercase">{{ default "set subtitle param to display here" .Site.Params.subtitle }}</h2>
-      <h1 class="title is-size-1 is-size-2-mobile has-text-black is-family-secondary"><a href="/" class="has-text-black">{{ .Site.Title }}</a></h1>
-    </div>
+  <div class="container has-text-centered">
+    <h2 class="subtitle is-size-4 is-size-6-mobile is-spaced is-uppercase">{{ default "set subtitle param to display here" .Site.Params.subtitle }}</h2>
+    <h1 class="title is-size-1 is-size-2-mobile has-text-black is-family-secondary"><a href="/" class="has-text-black">{{ .Site.Title }}</a></h1>
+  </div>
 </section>
-{{ partial "menu" (dict "menuID" "main" "page" . "social" .Site.Params.author.social "BaseURL" .Site.BaseURL) }}
+{{ partial "menu" (dict "menuID" "main" "page" . "social" .Site.Params.author.social) }}
+
+<span class="is-block has-text-centered is-hidden-desktop">
+  <span class="icon">
+    <i class="fas fa-infinity"></i>
+    {{/* <i class="fas fa-paper-plane"></i> */}}
+    {{/* <i class="fas fa-leaf"></i> */}}
+    {{/* <i class="fas fa-grip-lines"></i> */}}
+    {{/* <i class="fas fa-mug-hot"></i> */}}
+  </span>
+</span>

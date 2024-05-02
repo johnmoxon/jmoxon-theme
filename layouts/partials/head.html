@@ -44,15 +44,19 @@
 
     <meta name="description" content="{{ .Summary }}">
     <meta name='keywords' content='{{ if .Keywords }}{{ delimit .Keywords ", " }}{{end}}'>
-    <link rel="alternate" type="application/rss+xml" href="{{ .Site.BaseURL }}index.xml" title="RSS feed">
+    {{/*  <link rel="alternate" type="application/rss+xml" href="/index.xml" title="RSS feed">  */}}
 
-    {{ if .HasShortcode "plotly" }}
+    {{- with .OutputFormats.Get "rss" -}}
+    {{- printf `<link rel=%q type=%q href=%q title=%q>` .Rel .MediaType.Type .Permalink site.Title | safeHTML -}}
+    {{- end -}}
+
+    {{- if .HasShortcode "plotly" -}}
     <script src="https://cdn.plot.ly/plotly-2.28.0.min.js"></script>
-    {{ end }}
+    {{- end -}}
 
 
     {{/* Include CSS for lqip's */}}
-    {{ partial "head/head_images" . }}
+    {{- partial "head/head_images" . }}
 
     {{- template "_internal/opengraph.html" . -}}
     {{- template "_internal/twitter_cards.html" . -}}

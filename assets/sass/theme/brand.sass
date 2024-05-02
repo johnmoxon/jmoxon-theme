@@ -50,11 +50,16 @@ a.is-link,
     color: $primary
 
 
-a.is-link:hover, 
+a.is-link:hover,
 article .content a:hover
     text-decoration: underline
     color: $primary
-    
+
+header
+    section.section
+        @include for-phone-only
+            padding-top: 3.2rem
+
 blockquote
     background-color: white
 
@@ -73,6 +78,9 @@ blockquote
 
 .content
     figure
+        @include for-phone-only
+            margin-left: 0 !important
+            margin-right: 0 !important
         img
             display: block !important
         figcaption
@@ -83,8 +91,6 @@ blockquote
             text-align: left
             line-height: 1rem
             // @extend .pt-0
-
-
 
 
 ::selection
@@ -104,9 +110,9 @@ img::-moz-selection
     background: 0 0
 
 // Navbar
-@media (max-width: 1023px)
-    .navbar
-        position: absolute !important
-        top: 0px
-        right: 0
-        width: 100%
+// @media (max-width: 1023px)
+//     .navbar
+//         position: absolute !important
+//         top: 0px
+//         right: 0
+//         width: 100%

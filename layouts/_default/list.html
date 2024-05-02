@@ -1,33 +1,25 @@
 {{ define "main" }}
 
 {{ $data := .Data }}
-
 <div class="container">
   <section class="section">
-    <div class="level">
-      <div class="level-left">
-        <h2 class="level-item is-family-secondary">
-          <span class="title is-2">{{ strings.Title .Type }}</span>
-          <span class="icon">
-            <i class="fas fa-arrow-right"></i>
-          </span>
-          <span class="title is-2">{{ strings.Title .Title }}</span>
-        </h2>
-      </div>
-      <div class="level-right">
+    {{ partial "breadcrumbs" . }}
+    <h2 class="is-family-secondary pb-5">
+      <span class="title is-2 is-size-3-mobile">{{ strings.Title .Title }} Articles</span>
+    </h2>
 
-        <a href="{{ $.Site.LanguagePrefix | absURL }}{{ $data.Plural }}/" class="button">see all {{ .Type }}</a>
-      </div>
-    </div>
-    
     {{ with .Content }}
     <div class="content">
-      {{.}}
+      {{ . }}
     </div>
     {{ end }}
 
-    {{ $pages := .Pages }}
-    {{ partial "posts_list" (dict "Page" . "FilteredPages" $pages) }}
+    {{/*  include posts assigned to this section  */}}
+        {{ partial "posts_list" (dict
+        "Page" .Page
+        "PaginateObj" .Paginator
+        ) }}
+
   </section>
 </div>
 {{ end }}
