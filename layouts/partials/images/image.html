@@ -28,7 +28,7 @@ horizontally and adjust its height automatically for that, and then
 fade in for the LQIP effect.
 Feel free to adjust your CSS/SCSS as desired.
 */}}
-{{- $imgClass := "w-full h-auto animate-fade" -}}
+{{- $imgClass := print "w-full h-auto animate-fade" " " .class -}}
 {{/*  {{- $dataSzes := "(min-width: 1024px) 60vw, 90vw" -}}  */}}
 
 
@@ -51,7 +51,7 @@ Calculated - Keep in partial
 **************************************/}}
 {{- $imgBd5 := md5 $src -}}
 {{ $ratioID := print "-rt" (replace $ratio "/" "_") }}
-{{- $divClass := print "is-relative image bg-center imgB-" $imgBd5 $ratioID "-" $holder -}}
+{{- $divClass := print "is-relative image bg-center imgB-" $imgBd5 $ratioID "-" $holder " " .class -}}
 
 {{/*
 Then, we create a 640-pixel-wide JPG of the image.
