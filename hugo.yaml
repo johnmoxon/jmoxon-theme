@@ -18,6 +18,12 @@ params:
   # description: Text about my cool site
   mainSections:
     - "articles"
+  services:
+    plausible:
+      domain: "example.com"
+      src: "https://analytics.example.net/js/script.js"
+    googletag:
+      id: G-XXXXXXXXXX
   imaging:
     aspectRatios:
       '3/2':

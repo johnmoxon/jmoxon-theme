@@ -5,11 +5,27 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     {{/*  google tag manager / google analytics internal template here  */}}
-    {{ if .Params.noindex }}
+    {{- if .Params.noindex }}
     <meta name="robots" content="noindex,nofollow" />
-    {{ end }}
+    {{ end -}}
 
-  {{ partial "head/css.html" . }}
+    {{- with .Site.Params.Services.Plausible }}
+    <script defer data-domain="{{ .domain }}" src="{{ .src }}"></script>
+    {{ end -}}
+
+    {{- with .Site.Params.Services.Googletag }}
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ .id }}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+
+      gtag('config', '{{ .id }}');
+    </script>
+    {{ end -}}
+
+  {{- partial "head/css.html" . -}}
 
     <link rel="preload" href="/fonts/Cardo/Cardo-Regular.woff2" as="font" crossorigin>
     <link rel="preload" href="/fonts/Montserrat/Montserrat-Regular.woff2" as="font" crossorigin>
