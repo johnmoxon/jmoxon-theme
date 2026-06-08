@@ -9,11 +9,16 @@
     <meta name="robots" content="noindex,nofollow" />
     {{ end -}}
 
-    {{- with .Site.Params.Services.Plausible }}
-    <script defer data-domain="{{ .domain }}" src="{{ .src }}"></script>
+    {{- with .Site.Params.services.plausible }}
+    <!-- Privacy-friendly analytics by Plausible -->
+    <script async src="{{ .src }}"></script>
+    <script>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
     {{ end -}}
 
-    {{- with .Site.Params.Services.Googletag }}
+    {{- with .Site.Params.services.googletag }}
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ .id }}"></script>
     <script>
