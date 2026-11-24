@@ -1,31 +1,13 @@
-name = 'Theme name'
+name = 'jmoxon'
 license = 'MIT'
-licenselink = 'https://github.com/owner/repo/LICENSE'
-description = 'Theme description'
+licenselink = 'https://github.com/johnmoxon/jmoxon-theme/blob/main/LICENSE'
+description = 'Editorial blog theme for jmoxon.net, built on Bulma 1 with light and dark themes.'
+homepage = 'https://github.com/johnmoxon/jmoxon-theme'
+demosite = 'https://jmoxon.net'
+tags = ['blog', 'bulma', 'dark mode', 'responsive images']
+features = ['light and dark themes', 'responsive images with placeholders', 'config-driven analytics']
+min_version = '0.158.0'
 
-# The home page of the theme, where the source can be found
-homepage = 'https://github.com/owner/repo'
-
-# If you have a running demo of the theme
-# demosite = 'https://owner.github.io/repo'
-
-# Taxonomy terms
-tags = ['blog', 'company']
-features = ['some', 'awesome', 'features']
-
-# If the theme has multiple authors
-authors = [
-  {name = 'Name of author', homepage = 'Website of author'},
-  {name = 'Name of author', homepage = 'Website of author'}
-]
-
-# If the theme has a single author
 [author]
-  name = 'Your name'
-  homepage = 'Your website'
-
-# If porting an existing theme
-[original]
-  author = 'Name of original author'
-  homepage = 'Website of original author'
-  repo = 'https://github.com/owner/repo'
+  name = 'John Moxon'
+  homepage = 'https://jmoxon.net'

@@ -1,0 +1,11 @@
+{{- /* Applies a saved light/dark choice before the stylesheet renders. With
+no saved choice the CSS follows the visitor's system setting. */ -}}
+<meta name="color-scheme" content="light dark">
+<script>
+  (function () {
+    try {
+      var t = localStorage.getItem('theme');
+      if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  })();
+</script>

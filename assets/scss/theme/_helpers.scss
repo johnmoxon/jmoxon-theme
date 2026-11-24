@@ -1,0 +1,63 @@
+// Theme helper classes
+.is-horizontal-center { justify-content: center; }
+
+.rounded-image-has-inner-shadow {
+  position: absolute;
+  width: 128px;
+  height: 128px;
+  box-shadow: inset 0 7px 9px -7px rgba(0, 0, 0, 0.4);
+  border-radius: 100px;
+  top: 0;
+}
+
+.is-double-spaced { line-height: 2rem; }
+
+.has-vcentred-content {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.has-border-black,
+.has-border-ink { border: 1px solid var(--jm-ink); }
+
+.is-ontop {
+  position: absolute;
+  z-index: 5;
+  left: 0.3rem;
+  bottom: 0.3rem;
+}
+
+.is-ontop-right {
+  position: absolute;
+  z-index: 5;
+  right: 0.3rem;
+  bottom: 0.3rem;
+}
+
+.is-radiusless { border-radius: 0 !important; }
+.is-shadowless { box-shadow: none !important; }
+
+.is-clickable {
+  cursor: pointer !important;
+  pointer-events: all !important;
+}
+
+.has-third-width { width: 16rem; }
+.has-half-width { width: 24rem; max-width: 100%; }
+
+.is-gap-1 { gap: 1.4rem; }
+.is-gap-2 { gap: 2.4rem; }
+
+.flex-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 1rem;
+}
+
+.is-rounded { border-radius: 50%; }
+
+.card.has-min-height,
+.box.has-min-height { min-height: 125px; }

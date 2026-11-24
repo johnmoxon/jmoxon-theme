@@ -1,7 +1,10 @@
 baseURL: 'https://jmoxon.net/'
-languageCode: en-us
+locale: en-US
 title: 'Theme site'
-paginate: 10
+
+pagination:
+  pagerSize: 10
+
 menus:
   main:
     - name: Home
@@ -13,17 +16,29 @@ menus:
     - name: Contact
       pageRef: /contact
       weight: 30
+
 params:
   subtitle: "Subtitle here"
   # description: Text about my cool site
   mainSections:
     - "articles"
+
+  # Show the light/dark toggle in the navbar. The site follows the visitor's
+  # system preference either way.
+  themeToggle: true
+
+  # Analytics integrations. Each one is included only when its block is set,
+  # and only in production builds (hugo / netlify, not hugo server).
   services:
-    plausible:
-      domain: "example.com"
-      src: "https://analytics.example.net/js/script.js"
-    googletag:
-      id: G-XXXXXXXXXX
+    # plausible:
+    #   src: "https://analytics.example.net/js/script.js"
+    # googletag:
+    #   id: G-XXXXXXXXXX
+    # umami:
+    #   id: 00000000-0000-0000-0000-000000000000   # data-website-id
+    #   src: "https://analytics.example.net/s.js"
+    #   recorder: "https://analytics.example.net/recorder.js"  # optional session recorder
+
   imaging:
     aspectRatios:
       '3/2':
@@ -44,10 +59,10 @@ params:
         sizes:
           - "(min-width: 768px) 20vw"
           - "70px"
+
   author:
     name: John
     social:
-    # Move to params - Author is deprecates
       linkedin:
         user: johnmoxon
       twitter:
@@ -55,13 +70,13 @@ params:
 
 imaging:
   bgColor: '#ffffff'
-  hint: photo
+  webp:
+    hint: photo
   quality: 80
   resampleFilter: Box
   anchor: "Center"
 
 taxonomies:
-  # articles: articles
   categories: categories
   tags: tags
   authors: authors
@@ -69,43 +84,14 @@ taxonomies:
 module:
   hugoVersion:
     extended: false
-    min: 0.116.0
+    min: 0.158.0
   imports:
-  - path: github.com/jgthms/bulma
-    mounts:
-    - source: bulma.sass
-      target: assets/bulma/bulma.sass
-    - source: sass/utilities
-      target: assets/sass/bulma/utilities
-    - source: sass/base
-      target: assets/sass/bulma/base
-    - source: sass/elements
-      target: assets/sass/bulma/elements
-    - source: sass/form
-      target: assets/sass/bulma/form
-    - source: sass/components
-      target: assets/sass/bulma/components
-    - source: sass/grid
-      target: assets/sass/bulma/grid
-    - source: sass/helpers
-      target: assets/sass/bulma/helpers
-    - source: sass/layout
-      target: assets/sass/bulma/layout
+    # Bulma 1.x Sass sources, compiled with Dart Sass (assets/scss/main.scss)
+    - path: github.com/jgthms/bulma
+      mounts:
+        - source: sass
+          target: assets/bulma
 
-
-# Dev mounts - Merge real site content with
-# !Important - remove before push
-  # mounts:
-  #   - source: ../jmoxon.net/content
-  #     target: content
-  #   - source: content
-  #     target: content
-  #   - source: ../jmoxon.net/static
-  #     target: static
-  #   - source: static
-  #     target: static
-  #   - source: ../jmoxon.net/assets
-  #     target: assets
-  #   - source: assets
-  #     target: assets
-
+# Local development against the real site content:
+#   cd ../jmoxon.net
+#   HUGO_MODULE_REPLACEMENTS="github.com/johnmoxon/jmoxon-theme -> $PWD/../jmoxon-theme" hugo server

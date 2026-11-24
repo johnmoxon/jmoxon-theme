@@ -1,0 +1,27 @@
+{{- $social := .social }}
+{{- $page := .Page }}
+
+{{ if .social.linkedin.user  }}
+<span class="icon">
+    <a href="https://www.linkedin.com/in/{{ .social.linkedin.user }}">
+    <i class="fa-brands fa-linkedin has-text-ink"></i>
+    </a>
+</span>
+{{ end }}
+{{ if .social.twitter.user  }}
+<span class="icon">
+    <a href="https://twitter.com/{{ .social.twitter.user }}">
+    <i class="fa-brands fa-x-twitter has-text-ink"></i>
+    </a>
+</span>
+{{ end }}
+<span class="icon">
+    <a href="/index.xml" class="RSS Feed">
+    <i class="fa-solid fa-rss has-text-ink"></i>
+    </a>
+</span>
+<span class="icon">
+    <a href="javascript:void(0)" class="bookmark-this">
+    <i class="fa-regular fa-bookmark has-text-ink"></i>
+    </a>
+</span>

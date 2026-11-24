@@ -1,0 +1,102 @@
+// Base branding styles
+@use "breakpoints" as bp;
+
+a.is-link,
+.content a {
+  color: var(--bulma-primary);
+}
+
+a.is-link:hover,
+article .content a:hover {
+  text-decoration: underline;
+  color: var(--bulma-primary);
+}
+
+// Theme-aware replacement for Bulma's fixed .has-text-black
+.has-text-ink,
+a.has-text-ink {
+  color: var(--jm-ink) !important;
+}
+
+.title,
+.title a {
+  color: var(--jm-ink);
+}
+
+header section.section {
+  @include bp.for-phone-only {
+    padding-top: 3.2rem;
+  }
+}
+
+blockquote {
+  background-color: transparent;
+
+  p {
+    font-size: 3rem;
+    text-align: center;
+    line-height: 3rem;
+
+    @include bp.for-phone-only {
+      font-size: 1.8rem;
+      line-height: 2rem;
+    }
+  }
+
+  p cite {
+    display: block;
+    font-size: 1rem;
+    text-align: right;
+  }
+}
+
+.content {
+  // Bulma 1 gives blockquotes a tinted panel; the theme uses pull quotes.
+  blockquote {
+    background-color: transparent;
+    border-inline-start: none;
+  }
+
+  figure {
+    @include bp.for-phone-only {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+
+    img {
+      display: block !important;
+    }
+
+    figcaption {
+      font-family: var(--bulma-family-primary);
+      font-size: var(--bulma-size-7);
+      font-style: normal !important;
+      text-align: left;
+      line-height: 1rem;
+      margin-bottom: 1.5rem;
+    }
+  }
+}
+
+::selection {
+  text-shadow: none;
+  background: var(--jm-selection);
+}
+
+img::selection {
+  background: transparent;
+}
+
+// Image loading (see _partials/images/image.html)
+.bg-center { background-position: center; }
+.w-full { width: 100%; }
+.h-auto { height: auto; }
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade {
+  animation: fadeIn 750ms ease-in-out;
+}

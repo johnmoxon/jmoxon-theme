@@ -1,0 +1,59 @@
+{{- /*
+Renders a menu for the given menu ID.
+
+@context {page} page The current page.
+@context {string} menuID The menu ID.
+@context {map} social params.author.social
+
+@example: {{ partial "menu.html" (dict "menuID" "main" "page" . "social" site.Params.author.social) }}
+*/}}
+{{- $page := .page }}
+{{- $social := .social }}
+
+{{- with index site.Menus .menuID }}
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" aria-controls="navbar-menu" data-target="navbar-menu" tabindex="0">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div id="navbar-menu" class="navbar-menu">
+    <div class="navbar-start">
+      {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
+      <div class="navbar-item sharing-utility">
+        {{ partial "social_icon_links.html" (dict "social" $social "Page" $page) }}
+        {{ partial "theme_toggle.html" . }}
+      </div>
+    </div>
+    <div class="navbar-end"></div>
+  </div>
+</nav>
+{{- end }}
+
+{{- define "_partials/inline/menu/walk.html" }}
+  {{- $page := .page }}
+  {{- range .menuEntries }}
+    {{- $attrs := dict "href" .URL "class" "navbar-item" }}
+    {{- if $page.IsMenuCurrent .Menu . }}
+      {{- $attrs = merge $attrs (dict "class" "navbar-item is-active" "aria-current" "page") }}
+    {{- else if $page.HasMenuCurrent .Menu . }}
+      {{- $attrs = merge $attrs (dict "class" "navbar-item ancestor" "aria-current" "true") }}
+    {{- end }}
+    {{- $name := .Name }}
+    {{- with .Identifier }}
+      {{- with T . }}
+        {{- $name = . }}
+      {{- end }}
+    {{- end }}
+    <a
+      {{- range $k, $v := $attrs }}
+        {{- with $v }}
+          {{- printf " %s=%q" $k $v | safeHTMLAttr }}
+        {{- end }}
+      {{- end -}}
+    >{{ $name }}</a>
+  {{- end }}
+{{- end }}

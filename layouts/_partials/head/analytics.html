@@ -1,0 +1,23 @@
+{{- /*
+Analytics integrations, switched on by blocks under params.services in the
+site config. Nothing is included outside production builds, so local
+previews (hugo server) never record visits.
+
+  params:
+    services:
+      plausible:
+        src: https://plausible.example.com/js/script.js
+      googletag:
+        id: G-XXXXXXXXXX
+      umami:
+        id: <website id>
+        src: https://umami.example.com/s.js
+        recorder: https://umami.example.com/recorder.js   # optional
+*/ -}}
+{{- if hugo.IsProduction }}
+  {{- with site.Params.services }}
+    {{- with .umami }}{{ partial "head/analytics/umami.html" . }}{{ end }}
+    {{- with .plausible }}{{ partial "head/analytics/plausible.html" . }}{{ end }}
+    {{- with .googletag }}{{ partial "head/analytics/googletag.html" . }}{{ end }}
+  {{- end }}
+{{- end }}

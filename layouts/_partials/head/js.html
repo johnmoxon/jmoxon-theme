@@ -1,0 +1,11 @@
+{{- with resources.Get "js/main.js" }}
+  {{- if hugo.IsProduction }}
+    {{- with . | js.Build (dict "minify" true) | fingerprint }}
+<script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous" defer></script>
+    {{- end }}
+  {{- else }}
+    {{- with . | js.Build }}
+<script src="{{ .RelPermalink }}" defer></script>
+    {{- end }}
+  {{- end }}
+{{- end }}

@@ -1,0 +1,7 @@
+{{- /* Light/dark toggle. Behaviour lives in assets/js/main.js. */ -}}
+{{- if site.Params.themeToggle | default true }}
+<button type="button" class="theme-toggle icon" data-theme-toggle aria-label="Switch colour theme" title="Switch colour theme">
+  <span class="theme-toggle-dark" aria-hidden="true"><i class="fa-regular fa-moon"></i></span>
+  <span class="theme-toggle-light" aria-hidden="true"><i class="fa-regular fa-sun"></i></span>
+</button>
+{{- end }}

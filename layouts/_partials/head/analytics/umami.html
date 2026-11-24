@@ -1,0 +1,12 @@
+{{- /* Self-hosted Umami. Context: params.services.umami */ -}}
+{{- with .id }}
+  {{- $id := . }}
+  {{- with $.src }}
+<script defer src="{{ . }}" data-website-id="{{ $id }}"></script>
+  {{- end }}
+  {{- with $.recorder }}
+<script defer src="{{ . }}" data-website-id="{{ $id }}"></script>
+  {{- end }}
+{{- else }}
+  {{- warnf "params.services.umami is set but has no id (the Umami website id), so Umami is not included." }}
+{{- end }}
