@@ -6,12 +6,12 @@
         <li><a href="{{ .URL }}">{{ .Name }}</a></li>
         {{- end }}
         {{- with site.Params.author.social }}
-        {{- with .linkedin.user }}<li><a href="https://www.linkedin.com/in/{{ . }}">{{ partial "icon.html" "linkedin" }} LinkedIn</a></li>{{ end }}
-        {{- with .twitter.user }}<li><a href="https://x.com/{{ . }}">{{ partial "icon.html" "x-twitter" }} X</a></li>{{ end }}
+        {{- with .linkedin.user }}<li><a href="https://www.linkedin.com/in/{{ . }}">LinkedIn</a></li>{{ end }}
+        {{- with .twitter.user }}<li><a href="https://x.com/{{ . }}">X (Twitter)</a></li>{{ end }}
         {{- end }}
-        {{- with site.Home.OutputFormats.Get "rss" }}<li><a href="{{ .RelPermalink }}">{{ partial "icon.html" "rss" }} RSS</a></li>{{ end }}
+        {{- with site.Home.OutputFormats.Get "rss" }}<li><a href="{{ .RelPermalink }}">RSS</a></li>{{ end }}
       </ul>
     </nav>
-    <p class="copyright">&copy; {{ now.Year }} {{ site.Params.author.name | default site.Title }}</p>
+    <p class="copyright">&copy; {{ now.Year }} {{ with site.Params.author.name }}{{ . }}{{ else }}{{ site.Title }}{{ end }}</p>
   </div>
 </footer>

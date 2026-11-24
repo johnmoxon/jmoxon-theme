@@ -77,6 +77,16 @@ main:focus {
 }
 
 // Tag chips
+// ".content ul" gives lists discs and an indent, so these lists need the
+// extra specificity of ul.* to switch both off.
+ul.tag-list,
+.content ul.tag-list,
+.share-links ul,
+.footer ul.footer-links {
+  list-style: none;
+  margin-inline-start: 0;
+}
+
 .tag-list {
   display: flex;
   flex-wrap: wrap;
@@ -90,9 +100,6 @@ main:focus {
   }
 }
 
-.content .tag-list {
-  margin-left: 0 !important;
-}
 
 a.tag {
   min-height: 1.75rem;
@@ -322,6 +329,11 @@ header .site-title {
   }
 }
 
+// Article page: room between the tag list and the author box.
+#main_article > .tag-list {
+  margin-bottom: 2.5rem !important;
+}
+
 // Count badges and the reading time pill follow the theme.
 .tag.count-badge,
 .tag.reading-time {
@@ -335,4 +347,16 @@ header .site-title {
 
 .featured-post .padded-multiline a {
   color: inherit;
+}
+
+// On phones columns stack, so the negative gutter margin only pushes the page
+// sideways (the 2.2rem column gap is wider than the section padding).
+@media (max-width: 768px) {
+  .columns:not(.is-mobile) {
+    margin-inline: 0;
+
+    > .column {
+      padding-inline: 0;
+    }
+  }
 }

@@ -4,7 +4,7 @@
 <div class="container">
   <section class="section">
     {{ partial "breadcrumbs" . }}
-    <h1 class="title is-2 is-size-3-mobile is-family-secondary pb-5">{{ strings.Title .Title }} Articles</h1>
+    <h1 class="title is-2 is-size-3-mobile is-family-secondary pb-5">{{ if eq .Kind "section" }}{{ strings.Title .Title }}{{ else }}{{ strings.Title .Title }} articles{{ end }}</h1>
 
     {{ with .Content }}
     <div class="content">
