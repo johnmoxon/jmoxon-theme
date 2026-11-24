@@ -1,16 +1,24 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://unpkg.com/@staticcms/app@^3.0.0/dist/main.css" />
+    <meta name="robots" content="noindex" />
     <title>Content Manager</title>
   </head>
   <body>
-    <!-- Include the script that builds the page and powers Static CMS -->
-    <script src="https://unpkg.com/@staticcms/app@^3.0.0/dist/static-cms-app.js"></script>
-    <script>
-      window.CMS.init();
-    </script>
+    <!--
+      Sveltia CMS, pinned to an exact version with a Subresource Integrity hash so
+      the CDN can never serve different code. To upgrade, change the version and
+      regenerate the hash:
+        curl -sL https://unpkg.com/@sveltia/cms@<version>/dist/sveltia-cms.js \
+          | openssl dgst -sha384 -binary | openssl base64 -A
+      The CMS reads ./config.yml, which the site provides (static/admin/config.yml).
+    -->
+    <script
+      src="https://unpkg.com/@sveltia/cms@0.271.3/dist/sveltia-cms.js"
+      integrity="sha384-08sU817PlntMV9MW/2pp0IotmofW+n3RbMf4eF7/9X7VMxrQXKFrZ4S6Vx6hEVez"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>
