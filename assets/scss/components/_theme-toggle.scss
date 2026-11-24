@@ -9,11 +9,6 @@
   font: inherit;
   line-height: 1;
 
-  &:focus-visible {
-    outline: 2px solid var(--bulma-primary);
-    outline-offset: 2px;
-  }
-
   // Show the icon for the mode you would switch to.
   .theme-toggle-dark { display: inline-flex; }
   .theme-toggle-light { display: none; }

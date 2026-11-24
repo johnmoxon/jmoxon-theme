@@ -1,5 +1,17 @@
-<footer class="footer pb-8 mt-5">
-  <div class="container has-text-centered content">
-    <p>Copyright {{ now.Year }}. All rights reserved.</p>
+<footer class="footer mt-6">
+  <div class="container has-text-centered">
+    <nav aria-label="Footer">
+      <ul class="footer-links">
+        {{- range site.Menus.main }}
+        <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+        {{- end }}
+        {{- with site.Params.author.social }}
+        {{- with .linkedin.user }}<li><a href="https://www.linkedin.com/in/{{ . }}">LinkedIn</a></li>{{ end }}
+        {{- with .twitter.user }}<li><a href="https://x.com/{{ . }}">X (Twitter)</a></li>{{ end }}
+        {{- end }}
+        {{- with site.Home.OutputFormats.Get "rss" }}<li><a href="{{ .RelPermalink }}">RSS</a></li>{{ end }}
+      </ul>
+    </nav>
+    <p class="copyright">&copy; {{ now.Year }} {{ with site.Params.author.name }}{{ . }}{{ else }}{{ site.Title }}{{ end }}</p>
   </div>
 </footer>

@@ -1,11 +1,11 @@
-
+{{- /* Tag chips for a page. A plain list, not a nav landmark. */ -}}
 {{ $taxonomy := "tags" }}
 {{ with .Page.Param $taxonomy }}
-<nav class="tags pt-3{{ if not $.IsPage }} is-hidden-mobile{{ end }}">
-    {{ range $index, $tag := . }}
-    {{ with $.Page.Site.GetPage (printf "/%s/%s" $taxonomy $tag) -}}
-    <a class="tag" href="{{ .RelPermalink }}">#{{ $tag | urlize }}</a>
-    {{- end -}}
-    {{- end -}}
-</nav>
+<ul class="tag-list pt-3{{ if not $.IsPage }} is-hidden-mobile{{ end }}" aria-label="Tags">
+  {{- range $index, $tag := . }}
+  {{- with $.Page.Site.GetPage (printf "/%s/%s" $taxonomy $tag) }}
+  <li><a class="tag" href="{{ .RelPermalink }}">#{{ $tag | urlize }}</a></li>
+  {{- end }}
+  {{- end }}
+</ul>
 {{ end }}

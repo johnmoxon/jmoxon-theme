@@ -6,8 +6,8 @@
     </figure>
     <div class="media-content">
         <div class="content">
-            <h3 class="title is-5 mb-0">{{ .Page.Params.fullname }}</h3>
-            <h4><small class="is-size-7">{{ .Page.Params.position }}</small></h4>
+            <h2 class="title is-5 mb-0">{{ .Page.Params.fullname }}</h2>
+            <p><small class="is-size-7">{{ .Page.Params.position }}</small></p>
             {{ .Page.Content }}
             {{ with .SourceKind }}
             {{ if eq . "taxonomy" }}
@@ -19,18 +19,10 @@
             <div class="level-left">
 
                 {{ with .Page.Params.Social.linkedin }}
-                <span class="icon">
-                    <a href="https://www.linkedin.com/in/{{.}}">
-                        <i class="fa-brands fa-linkedin has-text-ink"></i>
-                    </a>
-                </span>
+                <a class="icon-link mr-2" href="https://www.linkedin.com/in/{{.}}" aria-label="LinkedIn profile" title="LinkedIn">{{ partial "icon.html" "linkedin" }}</a>
                 {{end}}
                 {{ with .Page.Params.Social.twitter }}
-                <span class="icon">
-                    <a href="https://twitter.com/{{.}}">
-                        <i class="fa-brands fa-x-twitter has-text-ink"></i>
-                    </a>
-                </span>
+                <a class="icon-link" href="https://x.com/{{.}}" aria-label="X profile" title="X">{{ partial "icon.html" "x-twitter" }}</a>
                 {{ end }}
             </div>
         </nav>

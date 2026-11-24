@@ -61,7 +61,7 @@ params:
           - "70px"
 
   author:
-    name: John
+    # name: Your Name   # shown in the footer copyright line
     social:
       linkedin:
         user: johnmoxon

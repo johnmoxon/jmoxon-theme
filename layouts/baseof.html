@@ -5,10 +5,11 @@
   {{ block "head" . }}{{ end }}
 </head>
 <body id="jmoxon">
+  <a class="skip-link" href="#main">Skip to content</a>
   <header>
     {{ partial "header.html" . }}
   </header>
-  <main>
+  <main id="main" tabindex="-1">
     {{ block "main" . }}{{ end }}
   </main>
 

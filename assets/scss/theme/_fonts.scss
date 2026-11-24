@@ -18,3 +18,31 @@ $latin-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+0
   src: local('Montserrat Regular'), local('Montserrat-Regular'), url(/fonts/Montserrat/Montserrat-Regular.woff2) format('woff2');
   unicode-range: $latin-range;
 }
+
+// Real italic and bold faces, so the browser never fakes them.
+@font-face {
+  font-family: 'Cardo';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/Cardo/Cardo-Italic.woff2) format('woff2');
+  unicode-range: $latin-range;
+}
+
+@font-face {
+  font-family: 'Cardo';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/fonts/Cardo/Cardo-Bold.woff2) format('woff2');
+  unicode-range: $latin-range;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600 700;
+  font-display: swap;
+  src: url(/fonts/Montserrat/Montserrat-SemiBold.woff2) format('woff2');
+  unicode-range: $latin-range;
+}

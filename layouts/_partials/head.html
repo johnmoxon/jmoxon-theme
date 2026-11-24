@@ -16,7 +16,6 @@
 {{- partial "head/css.html" . }}
 <link rel="preload" href="/fonts/Cardo/Cardo-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/Montserrat/Montserrat-Regular.woff2" as="font" type="font/woff2" crossorigin>
-<script async src="https://kit.fontawesome.com/f74caf9b24.js" crossorigin="anonymous"></script>
 
 {{- with .OutputFormats.Get "rss" }}
 {{ printf `<link rel=%q type=%q href=%q title=%q>` .Rel .MediaType.Type .Permalink site.Title | safeHTML }}
