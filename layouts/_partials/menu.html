@@ -11,14 +11,14 @@ Renders a menu for the given menu ID.
 {{- $social := .social }}
 
 {{- with index site.Menus .menuID }}
-<nav class="navbar" role="navigation" aria-label="main navigation">
+<nav class="navbar" aria-label="Main">
   <div class="navbar-brand">
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" aria-controls="navbar-menu" data-target="navbar-menu" tabindex="0">
+    <button type="button" class="navbar-burger" aria-label="Menu" aria-expanded="false" aria-controls="navbar-menu" data-target="navbar-menu">
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
-    </a>
+    </button>
   </div>
   <div id="navbar-menu" class="navbar-menu">
     <div class="navbar-start">

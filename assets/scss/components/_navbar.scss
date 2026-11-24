@@ -46,8 +46,11 @@ $item-padding-x: 4rem;
   }
 
   a.navbar-item.is-active {
-    color: var(--bulma-primary);
+    color: var(--jm-link);
     background-color: transparent;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.4em;
   }
 
   div.sharing-utility {

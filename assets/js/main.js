@@ -33,8 +33,6 @@ function initThemeToggle() {
     const sync = () => {
       const dark = currentTheme() === 'dark';
       button.setAttribute('aria-pressed', String(dark));
-      button.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
-      button.title = button.getAttribute('aria-label');
     };
     sync();
     button.addEventListener('click', () => {
@@ -54,12 +52,6 @@ function initNavbarBurgers() {
       burger.setAttribute('aria-expanded', String(open));
     };
     burger.addEventListener('click', toggle);
-    burger.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        toggle();
-      }
-    });
   });
 }
 
@@ -70,30 +62,9 @@ function initButtons() {
   });
 }
 
-function scrollToArticle() {
-  // On small screens, jump past the header straight to the article
-  const article = document.querySelector('#main_article');
-  const burger = document.querySelector('.navbar-burger');
-  if (article && burger && burger.offsetParent !== null) {
-    article.scrollIntoView();
-  }
-}
-
-function initBookmarks() {
-  // Browsers no longer let pages add bookmarks, so show the shortcut instead.
-  const isMac = /mac/i.test(navigator.userAgent);
-  document.querySelectorAll('.bookmark-this').forEach((link) => {
-    link.addEventListener('click', (event) => {
-      event.preventDefault();
-      window.alert(`Press ${isMac ? 'Cmd' : 'Ctrl'}+D to bookmark this page.`);
-    });
-  });
-}
 
 document.addEventListener('DOMContentLoaded', () => {
   initThemeToggle();
   initNavbarBurgers();
   initButtons();
-  scrollToArticle();
-  initBookmarks();
 });

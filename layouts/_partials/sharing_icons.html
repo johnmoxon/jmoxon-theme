@@ -1,23 +1,11 @@
-<span class="icons is-pulled-right">
-    <span class="is-size-7">share </span>
-
-    {{ with .Params.Tags }}
-    <span class="icon">
-        <a href='https://twitter.com/intent/tweet?url={{ $.Permalink }}&text={{ (default "summary needs to be added" $.Params.Summary) | truncate 130 }}&hashtags={{ delimit . ","}}'>
-            {{/*  <i class="fab fa-twitter"></i>  */}}
-            <i class="fa-brands fa-x-twitter"></i>
-        </a>
-    </span>
-    {{ end }}
-    <span class="icon">
-        <a href="https://www.facebook.com/sharer.php?u={{ .Permalink }}" title="Share with facebook">
-            <i class="fa-brands fa-facebook"></i>
-        </a>
-    </span>
-    <span class="icon">
-        <a href='https://www.linkedin.com/shareArticle?url={{ .Permalink }}&mini=true&title={{ .Title }}&summary={{ .Params.Summary }}&source={{ site.Params.author.name }} | {{ .Title }}'
-            title="Share with facebook">
-            <i class="fa-brands fa-linkedin"></i>
-        </a>
-    </span>
-</span>
+{{- /* Share links for an article. Each link is named for screen readers. */ -}}
+{{- $url := .Permalink | urlquery }}
+{{- $title := .Title | urlquery }}
+<div class="share-links is-pulled-right">
+  <span class="is-size-7" id="share-label">Share</span>
+  <ul aria-labelledby="share-label">
+    <li><a class="icon-link" href="https://x.com/intent/post?url={{ $url }}&amp;text={{ $title }}{{ with .Params.Tags }}&amp;hashtags={{ delimit . "," | urlquery }}{{ end }}" aria-label="Share on X" title="Share on X">{{ partial "icon.html" "x-twitter" }}</a></li>
+    <li><a class="icon-link" href="https://www.facebook.com/sharer.php?u={{ $url }}" aria-label="Share on Facebook" title="Share on Facebook">{{ partial "icon.html" "facebook" }}</a></li>
+    <li><a class="icon-link" href="https://www.linkedin.com/sharing/share-offsite/?url={{ $url }}" aria-label="Share on LinkedIn" title="Share on LinkedIn">{{ partial "icon.html" "linkedin" }}</a></li>
+  </ul>
+</div>

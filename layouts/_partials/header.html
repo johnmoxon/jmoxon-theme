@@ -1,13 +1,16 @@
 <section class="section">
   <div class="container has-text-centered">
     <p class="subtitle is-size-4 is-size-6-mobile is-spaced is-uppercase">{{ default "set subtitle param to display here" site.Params.subtitle }}</p>
-    <p class="title is-size-1 is-size-2-mobile is-family-secondary"><a href="{{ "/" | relURL }}" class="has-text-ink">{{ site.Title }}</a></p>
+    {{- /* The site title is the page's h1 on the home page only. */}}
+    {{- if .IsHome }}
+    <h1 class="title site-title is-size-1 is-size-2-mobile is-family-secondary"><a href="{{ "/" | relURL }}" class="has-text-ink">{{ site.Title }}</a></h1>
+    {{- else }}
+    <div class="title site-title is-size-1 is-size-2-mobile is-family-secondary"><a href="{{ "/" | relURL }}" class="has-text-ink">{{ site.Title }}</a></div>
+    {{- end }}
   </div>
 </section>
 {{ partial "menu.html" (dict "menuID" "main" "page" . "social" site.Params.author.social) }}
 
-<span class="is-block has-text-centered is-hidden-desktop">
-  <span class="icon">
-    <i class="fas fa-infinity" aria-hidden="true"></i>
-  </span>
+<span class="is-block has-text-centered is-hidden-desktop header-ornament" aria-hidden="true">
+  <span class="icon">{{ partial "icon.html" "infinity" }}</span>
 </span>

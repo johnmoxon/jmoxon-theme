@@ -3,13 +3,143 @@
 
 a.is-link,
 .content a {
-  color: var(--bulma-primary);
+  color: var(--jm-link);
 }
 
 a.is-link:hover,
-article .content a:hover {
+.content a:hover {
+  color: var(--jm-link-hover);
+}
+
+// Links inside running text are underlined, so they never rely on colour
+// alone (WCAG 1.4.1). Tags and "read more" links have their own styling.
+.content a:not(.tag):not(.read-more):not(.button) {
   text-decoration: underline;
-  color: var(--bulma-primary);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+
+  &:hover {
+    text-decoration-thickness: 2px;
+  }
+}
+
+.breadcrumb a {
+  color: var(--jm-link);
+}
+
+// One visible focus ring for everything keyboard-focusable.
+:focus-visible {
+  outline: 2px solid var(--jm-focus);
+  outline-offset: 2px;
+}
+
+// Skip link: off screen until it receives keyboard focus.
+.skip-link {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 100;
+  padding: 0.5rem 1rem;
+  background: var(--jm-paper);
+  color: var(--jm-ink);
+  border: 2px solid var(--jm-focus);
+  transform: translateY(-200%);
+
+  &:focus {
+    transform: none;
+  }
+}
+
+main:focus {
+  outline: none;
+}
+
+// Inline SVG icons (see _partials/icon.html) sized like the old icon font.
+.svg-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+}
+
+// Icon-only links and buttons: at least 24 by 24px to hit (WCAG 2.5.8).
+.icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2rem;
+  min-height: 2rem;
+  color: var(--jm-ink);
+
+  &:hover {
+    color: var(--jm-link);
+  }
+}
+
+// Tag chips
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0 !important;
+  padding: 0;
+
+  li {
+    margin: 0 !important;
+  }
+}
+
+.content .tag-list {
+  margin-left: 0 !important;
+}
+
+a.tag {
+  min-height: 1.75rem;
+  color: var(--jm-link);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--jm-link-hover);
+    text-decoration: underline;
+  }
+}
+
+// "Read the article" links: tall enough to hit comfortably.
+.read-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  min-height: 1.75rem;
+  color: var(--jm-link);
+  font-weight: 600;
+}
+
+// A card whose title link covers the whole card (no nested links).
+.stretched-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.above-stretched-link {
+  position: relative;
+  z-index: 2;
+}
+
+// Share links on an article
+.share-links {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+
+  ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
 }
 
 // Theme-aware replacement for Bulma's fixed .has-text-black
@@ -99,4 +229,31 @@ img::selection {
 
 .animate-fade {
   animation: fadeIn 750ms ease-in-out;
+}
+
+// Respect the visitor's reduced motion setting (WCAG 2.3.3).
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+// Count badges and the reading time pill follow the theme.
+.tag.count-badge,
+.tag.reading-time {
+  background-color: var(--jm-ink);
+  color: var(--jm-paper);
+}
+
+.featured-post .card {
+  position: relative;
+}
+
+.featured-post .padded-multiline a {
+  color: inherit;
 }

@@ -1,0 +1,12 @@
+{{- /*
+Inline SVG icon from assets/icons. Decorative: hidden from assistive tech, so
+the surrounding link or button must carry the accessible name.
+
+@context {string} . The icon name, e.g. "rss" for assets/icons/rss.svg.
+@example {{ partial "icon.html" "rss" }}
+*/ -}}
+{{- with resources.Get (printf "icons/%s.svg" .) -}}
+  {{- replace .Content "<svg " `<svg class="svg-icon" aria-hidden="true" focusable="false" fill="currentColor" ` | safeHTML -}}
+{{- else -}}
+  {{- warnf "icon partial: assets/icons/%s.svg not found" . -}}
+{{- end -}}

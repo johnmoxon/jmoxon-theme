@@ -1,7 +1,8 @@
-{{- /* Light/dark toggle. Behaviour lives in assets/js/main.js. */ -}}
+{{- /* Light/dark toggle. Behaviour lives in assets/js/main.js. A toggle button
+with a fixed name: aria-pressed tells assistive tech whether dark is on. */ -}}
 {{- if site.Params.themeToggle | default true }}
-<button type="button" class="theme-toggle icon" data-theme-toggle aria-label="Switch colour theme" title="Switch colour theme">
-  <span class="theme-toggle-dark" aria-hidden="true"><i class="fa-regular fa-moon"></i></span>
-  <span class="theme-toggle-light" aria-hidden="true"><i class="fa-regular fa-sun"></i></span>
+<button type="button" class="theme-toggle icon-link" data-theme-toggle aria-pressed="false" aria-label="Dark theme" title="Dark theme">
+  <span class="theme-toggle-dark">{{ partial "icon.html" "moon" }}</span>
+  <span class="theme-toggle-light">{{ partial "icon.html" "sun" }}</span>
 </button>
 {{- end }}
