@@ -15,6 +15,7 @@
   --jm-link: #137a6b;
   --jm-link-hover: #0c5c50;
   --jm-focus: #137a6b;
+  --jm-image-dim: none;
   --bulma-text-strong: #000;
 }
 
@@ -25,7 +26,10 @@
   --jm-link: #28c3ab;
   --jm-link-hover: #5fd9c6;
   --jm-focus: #28c3ab;
+  --jm-image-dim: brightness(0.88);
   --bulma-text-strong: hsl(0, 0%, 92%);
+  // Brighter body text than Bulma's dark default (#b5b5b5) for long reading.
+  --bulma-text: hsl(0, 0%, 82%);
 }
 
 :root { @include light; color-scheme: light; }

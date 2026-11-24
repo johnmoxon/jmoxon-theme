@@ -68,4 +68,12 @@ $item-padding-x: 4rem;
 
 .navbar-burger {
   color: var(--jm-ink);
+  margin-inline-end: 0.5rem;
+}
+
+// Icons cell: icons sit together, not spread across the cell.
+.navbar-menu div.sharing-utility {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

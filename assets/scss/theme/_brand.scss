@@ -96,12 +96,14 @@ main:focus {
 
 a.tag {
   min-height: 1.75rem;
-  color: var(--jm-link);
+  background-color: transparent;
+  border: 1px solid var(--bulma-border);
+  color: var(--jm-ink);
   text-decoration: none;
 
   &:hover {
-    color: var(--jm-link-hover);
-    text-decoration: underline;
+    border-color: var(--jm-link);
+    color: var(--jm-link);
   }
 }
 
@@ -240,6 +242,83 @@ img::selection {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+// Long-form reading column: about 70 characters a line.
+.article-column {
+  max-width: 42rem;
+  margin-inline: auto;
+}
+
+.article-subtitle {
+  margin-top: 0.75rem !important;
+  letter-spacing: 0.06em;
+}
+
+.article-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.article-body {
+  line-height: 1.7;
+}
+
+// Photos are a touch dimmer in dark mode so they don't glare.
+picture img,
+.image img {
+  filter: var(--jm-image-dim);
+}
+
+// Site title and header on phones: less dead space.
+header .site-title {
+  letter-spacing: -0.01em;
+}
+
+.header-ornament {
+  color: var(--bulma-border);
+}
+
+// Footer
+.footer {
+  background-color: transparent;
+  border-top: 1px solid var(--jm-ink);
+  padding-block: 2.5rem 3rem;
+
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.25rem 1.5rem;
+    list-style: none;
+    margin: 0 0 1rem !important;
+    padding: 0;
+
+    li {
+      margin: 0 !important;
+    }
+
+    a {
+      color: var(--jm-ink);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4em;
+      min-height: 1.75rem;
+      text-decoration: none;
+
+      &:hover {
+        color: var(--jm-link);
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .copyright {
+    font-size: var(--bulma-size-7);
   }
 }
 
