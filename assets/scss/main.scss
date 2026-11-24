@@ -1,0 +1,88 @@
+@charset "utf-8";
+
+// ---------------------------------------------------------------------------
+// jmoxon theme stylesheet
+//
+// Bulma 1.x is mounted from the github.com/jgthms/bulma Hugo module at
+// assets/bulma (see hugo.yaml). Only the parts of Bulma the theme uses are
+// loaded (imported relatively, which is how Hugo resolves mounted Sass). Compiled with Dart Sass (transpiler "dartsass").
+// ---------------------------------------------------------------------------
+
+// Brand configuration. Every Bulma module below picks this up.
+@use "../bulma/utilities" with (
+  // Neutral greys (Bulma 1 defaults to a blue-tinted scheme)
+  $scheme-h: 0,
+  $scheme-s: 0%,
+  $primary: #28c3ab,
+  $link: #28c3ab,
+  $family-primary: ('Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif),
+  $family-secondary: ('Cardo', 'Baskerville', 'Calibri', serif),
+  $size-1: 6.6rem,
+  $widescreen-enabled: false,
+  $fullhd-enabled: false,
+  // Only the colours the theme uses. Bulma generates a set of CSS variables
+  // for every colour in both themes, so each extra colour adds weight.
+  $colors: (
+    "white": (#fff, #000),
+    "black": (#000, #fff),
+    "light": (hsl(0, 0%, 96%), hsl(0, 0%, 21%)),
+    "dark": (hsl(0, 0%, 21%), hsl(0, 0%, 96%)),
+    "text": hsl(0, 0%, 29%),
+    "primary": #28c3ab,
+    "link": #28c3ab,
+  ),
+  $shades: ()
+);
+
+// Light and dark themes as CSS variables. Follows the visitor's system
+// preference, and html[data-theme="light|dark"] (set by the toggle) wins.
+@use "../bulma/themes";
+
+// Base
+@use "../bulma/base/minireset";
+@use "../bulma/base/generic";
+@use "../bulma/base/animations";
+
+// Elements
+@use "../bulma/elements/box" with ($box-radius: 6px);
+@use "../bulma/elements/button";
+@use "../bulma/elements/content";
+@use "../bulma/elements/icon";
+@use "../bulma/elements/image";
+@use "../bulma/elements/table";
+@use "../bulma/elements/tag";
+@use "../bulma/elements/title";
+
+// Components
+@use "../bulma/components/breadcrumb";
+@use "../bulma/components/card" with ($card-radius: 0);
+@use "../bulma/components/navbar" with ($navbar-padding-horizontal: 4rem);
+@use "../bulma/components/pagination";
+@use "../bulma/components/panel";
+
+// Grid and layout
+@use "../bulma/grid/columns" with ($column-gap: 2.2rem);
+@use "../bulma/layout/container";
+@use "../bulma/layout/footer";
+@use "../bulma/layout/hero";
+@use "../bulma/layout/level";
+@use "../bulma/layout/media";
+@use "../bulma/layout/section";
+
+// Helpers (only the groups the templates use; colour helpers are large)
+@use "../bulma/helpers/flexbox";
+@use "../bulma/helpers/float";
+@use "../bulma/helpers/other";
+@use "../bulma/helpers/position";
+@use "../bulma/helpers/spacing";
+@use "../bulma/helpers/typography";
+@use "../bulma/helpers/visibility";
+
+// Theme
+@use "theme/tokens" as theme-tokens;
+@use "theme/fonts" as theme-fonts;
+@use "theme/brand" as theme-brand;
+@use "theme/helpers" as theme-helpers;
+@use "components/navbar" as navbar-overrides;
+@use "components/card" as card-overrides;
+@use "components/theme-toggle";

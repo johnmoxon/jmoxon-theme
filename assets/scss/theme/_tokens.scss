@@ -1,0 +1,28 @@
+// Theme colour tokens that sit on top of Bulma's light/dark CSS variables.
+//   --jm-ink    strong text, rules and borders (black in light mode)
+//   --jm-paper  the page colour that sits behind ink
+// The selector order mirrors Bulma's themes so the toggle overrides the
+// visitor's system preference.
+
+@mixin light {
+  --jm-ink: #000;
+  --jm-paper: #fff;
+  --jm-selection: rgba(40, 195, 171, 0.3);
+  --bulma-text-strong: #000;
+}
+
+@mixin dark {
+  --jm-ink: hsl(0, 0%, 90%);
+  --jm-paper: hsl(0, 0%, 9%);
+  --jm-selection: rgba(40, 195, 171, 0.45);
+  --bulma-text-strong: hsl(0, 0%, 92%);
+}
+
+:root { @include light; color-scheme: light; }
+
+@media (prefers-color-scheme: dark) {
+  :root { @include dark; color-scheme: dark; }
+}
+
+[data-theme="light"], .theme-light { @include light; color-scheme: light; }
+[data-theme="dark"], .theme-dark { @include dark; color-scheme: dark; }

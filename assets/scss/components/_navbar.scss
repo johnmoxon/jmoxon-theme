@@ -1,0 +1,68 @@
+@use "../theme/breakpoints" as bp;
+
+$item-padding-x: 4rem;
+
+.navbar {
+  background-color: transparent;
+
+  @include bp.has-mobile-navbar {
+    position: absolute !important;
+    top: 0;
+    right: 0;
+    width: 100%;
+  }
+}
+
+.navbar-menu {
+  border: 1px solid var(--jm-ink);
+  border-width: 1px 0;
+
+  @include bp.has-standard-navbar {
+    background-color: transparent;
+  }
+
+  @include bp.has-mobile-navbar {
+    padding-bottom: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  a.navbar-item,
+  a.navbar-link {
+    color: var(--jm-ink);
+    padding: 0.8rem $item-padding-x;
+  }
+
+  // Ruled cells only on the full-width navbar
+  @include bp.has-standard-navbar {
+    .navbar-item:first-child {
+      border-left: 1px solid var(--jm-ink);
+    }
+
+    a.navbar-item,
+    a.navbar-link,
+    div.sharing-utility {
+      border-right: 1px solid var(--jm-ink);
+    }
+  }
+
+  a.navbar-item.is-active {
+    color: var(--bulma-primary);
+    background-color: transparent;
+  }
+
+  div.sharing-utility {
+    padding: 0.8rem ($item-padding-x - 0.3rem);
+    gap: 0.25rem;
+  }
+}
+
+.navbar-start {
+  @include bp.has-standard-navbar {
+    flex: 1;
+    justify-content: center;
+  }
+}
+
+.navbar-burger {
+  color: var(--jm-ink);
+}

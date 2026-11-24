@@ -1,0 +1,20 @@
+// Breakpoint mixins used by the theme's own styles.
+@use "../../bulma/utilities/initial-variables" as iv;
+
+$navbar-breakpoint: iv.$desktop;
+
+@mixin for-phone-only {
+  @media (max-width: 599px) { @content; }
+}
+
+@mixin for-tablet-portrait-up {
+  @media (min-width: iv.$tablet) { @content; }
+}
+
+@mixin has-mobile-navbar {
+  @media (max-width: $navbar-breakpoint - 1px) { @content; }
+}
+
+@mixin has-standard-navbar {
+  @media (min-width: $navbar-breakpoint) { @content; }
+}

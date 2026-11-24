@@ -1,0 +1,66 @@
+@use "../theme/breakpoints" as bp;
+
+.card {
+  background-color: transparent;
+  color: inherit;
+}
+
+.featured-post {
+  border: 1px solid var(--jm-ink);
+
+  @include bp.for-phone-only {
+    border: none;
+
+    .card .card-content {
+      padding: 1rem 0 0 0 !important;
+    }
+  }
+}
+
+.article-list .card .card-content {
+  padding: 1rem 0 0 0 !important;
+}
+
+.card {
+  .media-right {
+    width: 170px;
+
+    @include bp.for-phone-only {
+      width: 70px;
+    }
+  }
+
+  .padded-multiline {
+    line-height: 1.8;
+    position: absolute;
+    z-index: 10;
+    padding: 0.5rem 3rem 0.5rem 0.5rem;
+
+    @include bp.for-phone-only {
+      position: relative;
+      padding: 0;
+      line-height: 1;
+    }
+
+    @include bp.for-tablet-portrait-up {
+      padding-top: 4rem;
+    }
+
+    span {
+      background-color: var(--jm-ink);
+      color: var(--jm-paper);
+      display: inline;
+      padding: 0.3rem 2.5rem 0.3rem 0.5rem;
+      -webkit-box-decoration-break: clone;
+      box-decoration-break: clone;
+
+      @include bp.for-phone-only {
+        background-color: unset;
+        color: var(--jm-ink);
+        font-family: var(--bulma-family-secondary);
+        -webkit-box-decoration-break: none;
+        box-decoration-break: none;
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+
+<div class="featured-post has-border">
+    <a href="{{ .Page.RelPermalink }}">
+        <div class="card is-shadowless">
+            <h2 class="title is-size-3 is-size-4-mobile padded-multiline"><span>{{ .Page.LinkTitle }}</span></h2>
+            <div class="card-image image">
+              {{ partial "images/image" (dict
+                "Page" .Page
+                "src" (.Page.Resources.GetMatch .Page.Params.Image.src)
+                "alt" .Page.Params.Image.alt
+                "readingTime" .Page.ReadingTime
+              ) }}
+            </div>
+            <div class="card-content">
+                <div class="content mb-3">
+                    <a href="{{ .Page.RelPermalink }}" class="has-text-ink">
+                        {{ .Page.Params.Summary }}
+                    </a><a href="{{ .Page.RelPermalink }}" class="is-link">read more&hellip;</a>
+                </div>
+                {{ partial "tags" (dict
+                  "Page" .Page
+                ) }}
+            </div>
+        </div>
+    </a>
+</div>
+<hr>

@@ -1,0 +1,31 @@
+// Light/dark toggle button in the navbar (see _partials/theme_toggle.html)
+.theme-toggle {
+  appearance: none;
+  background: none;
+  border: 0;
+  color: var(--jm-ink);
+  cursor: pointer;
+  padding: 0;
+  font: inherit;
+  line-height: 1;
+
+  &:focus-visible {
+    outline: 2px solid var(--bulma-primary);
+    outline-offset: 2px;
+  }
+
+  // Show the icon for the mode you would switch to.
+  .theme-toggle-dark { display: inline-flex; }
+  .theme-toggle-light { display: none; }
+}
+
+@mixin show-light-icon {
+  .theme-toggle .theme-toggle-dark { display: none; }
+  .theme-toggle .theme-toggle-light { display: inline-flex; }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { @include show-light-icon; }
+}
+
+[data-theme="dark"] { @include show-light-icon; }

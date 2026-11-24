@@ -1,0 +1,13 @@
+<section class="section">
+  <div class="container has-text-centered">
+    <p class="subtitle is-size-4 is-size-6-mobile is-spaced is-uppercase">{{ default "set subtitle param to display here" site.Params.subtitle }}</p>
+    <p class="title is-size-1 is-size-2-mobile is-family-secondary"><a href="{{ "/" | relURL }}" class="has-text-ink">{{ site.Title }}</a></p>
+  </div>
+</section>
+{{ partial "menu.html" (dict "menuID" "main" "page" . "social" site.Params.author.social) }}
+
+<span class="is-block has-text-centered is-hidden-desktop">
+  <span class="icon">
+    <i class="fas fa-infinity" aria-hidden="true"></i>
+  </span>
+</span>

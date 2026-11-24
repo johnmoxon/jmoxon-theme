@@ -1,69 +1,99 @@
-// Enable mobile nav banner
+// jmoxon theme behaviour. Bundled by Hugo's js.Build (esbuild).
+
+const THEME_KEY = 'theme';
+
+function prefersDark() {
+  return window.matchMedia('(prefers-color-scheme: dark)').matches;
+}
+
+function currentTheme() {
+  const set = document.documentElement.dataset.theme;
+  if (set === 'light' || set === 'dark') return set;
+  return prefersDark() ? 'dark' : 'light';
+}
+
+function applyTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  try {
+    // Forget the choice when it matches the system, so the site keeps
+    // following the system setting if that changes later.
+    const systemTheme = prefersDark() ? 'dark' : 'light';
+    if (theme === systemTheme) {
+      localStorage.removeItem(THEME_KEY);
+    } else {
+      localStorage.setItem(THEME_KEY, theme);
+    }
+  } catch (e) {
+    // Storage unavailable (private mode): the choice lasts for this page only.
+  }
+}
+
+function initThemeToggle() {
+  document.querySelectorAll('[data-theme-toggle]').forEach((button) => {
+    const sync = () => {
+      const dark = currentTheme() === 'dark';
+      button.setAttribute('aria-pressed', String(dark));
+      button.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
+      button.title = button.getAttribute('aria-label');
+    };
+    sync();
+    button.addEventListener('click', () => {
+      applyTheme(currentTheme() === 'dark' ? 'light' : 'dark');
+      sync();
+    });
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', sync);
+  });
+}
+
+function initNavbarBurgers() {
+  document.querySelectorAll('.navbar-burger').forEach((burger) => {
+    const toggle = () => {
+      const target = document.getElementById(burger.dataset.target);
+      const open = burger.classList.toggle('is-active');
+      if (target) target.classList.toggle('is-active', open);
+      burger.setAttribute('aria-expanded', String(open));
+    };
+    burger.addEventListener('click', toggle);
+    burger.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        toggle();
+      }
+    });
+  });
+}
+
+function initButtons() {
+  // Show a loading state on buttons when clicked
+  document.querySelectorAll('.button').forEach((button) => {
+    button.addEventListener('click', () => button.classList.toggle('is-loading'));
+  });
+}
+
+function scrollToArticle() {
+  // On small screens, jump past the header straight to the article
+  const article = document.querySelector('#main_article');
+  const burger = document.querySelector('.navbar-burger');
+  if (article && burger && burger.offsetParent !== null) {
+    article.scrollIntoView();
+  }
+}
+
+function initBookmarks() {
+  // Browsers no longer let pages add bookmarks, so show the shortcut instead.
+  const isMac = /mac/i.test(navigator.userAgent);
+  document.querySelectorAll('.bookmark-this').forEach((link) => {
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      window.alert(`Press ${isMac ? 'Cmd' : 'Ctrl'}+D to bookmark this page.`);
+    });
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-
-  // If there are any navbar burgers add a click event to each to toggle classes
-  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
-  if ($navbarBurgers.length > 0) {
-    $navbarBurgers.forEach( el => {
-      el.addEventListener('click', () => {
-        const $target = document.getElementById(el.dataset.target);
-        el.classList.toggle('is-active');
-        $target.classList.toggle('is-active');
-      })
-    });
-  }
-
-  // Add loading modifiers to buttons when clicked
-  const $buttons = Array.prototype.slice.call(document.querySelectorAll('.button'), 0);
-  if ($buttons.length > 0) {
-    $buttons.forEach(el => {
-      el.addEventListener('click', () => {
-        el.classList.toggle('is-loading');
-      });
-    });
-  }
-
-  // If a post page, scroll to article start
-  if ( 
-      document.querySelector('#main_article') && 
-      document.querySelector('.navbar-burger').offsetParent !== null
-    ) {
-    const $scrollTarget = document.querySelector('#main_article');
-    $scrollTarget.scrollIntoView();
-  }
-
-  // Add handler for bookmark buttons
-  const $bookmark_buttons = Array.prototype.slice.call(document.querySelectorAll('.bookmark-this'), 0);
-  if ($bookmark_buttons.length > 0) {
-    $bookmark_buttons.forEach(el => {
-      let pageTitle = document.title;
-      let pageURL = document.location;
-
-      el.addEventListener('click', () => {
-        try {
-          // Internet Explorer solution
-          eval("window.external.AddFa-vorite(pageURL, pageTitle)".replace(/-/g, ''));
-        }
-        catch (e) {
-          try {
-            // Mozilla Firefox solution
-            window.sidebar.addPanel(pageTitle, pageURL, "");
-          }
-          catch (e) {
-            // Opera solution
-            if (typeof (opera) == "object") {
-              el.rel = "sidebar";
-              el.title = pageTitle;
-              el.url = pageURL;
-              return true;
-            } else {
-              // The rest browsers (i.e Chrome, Safari)
-              alert('Press ' + (navigator.userAgent.toLowerCase().indexOf('mac') != -1 ? 'Cmd' : 'Ctrl') + '+D to bookmark this page.');
-            }
-          }
-        }
-        return false;
-      });
-    });
-  }
+  initThemeToggle();
+  initNavbarBurgers();
+  initButtons();
+  scrollToArticle();
+  initBookmarks();
 });

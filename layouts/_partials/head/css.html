@@ -1,0 +1,18 @@
+{{- $opts := dict
+  "transpiler" "dartsass"
+  "targetPath" "css/style.css"
+  "vars" site.Params.styles
+  "enableSourceMap" (not hugo.IsProduction)
+  "silenceDependencyDeprecations" true
+}}
+{{- with resources.Get "scss/main.scss" }}
+  {{- with . | css.Sass $opts }}
+    {{- if hugo.IsProduction }}
+      {{- with . | minify | fingerprint }}
+<link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
+      {{- end }}
+    {{- else }}
+<link rel="stylesheet" href="{{ .RelPermalink }}">
+    {{- end }}
+  {{- end }}
+{{- end }}
