@@ -31,11 +31,11 @@
   {{- if or (or ($figureTitle) ($figureCaption)) ($figureAttr) -}}
   <figcaption class="is-size-7 is-block">
     {{ with ($figureTitle) -}}
-    <h4>{{ . }}</h4>
+    <p class="has-text-weight-semibold">{{ . }}</p>
     {{- end -}}
     {{- if or ($figureCaption) ($figureAttr) -}}<p>
       {{- $figureCaption | markdownify | plainify -}}&nbsp;
-      {{- with $figureAttrLink }}<a href="{{ . }}" target="_blank">{{- end -}}
+      {{- with $figureAttrLink }}<a href="{{ . }}" rel="noopener">{{- end -}}
         {{- $figureAttr | markdownify | plainify -}}
         {{- if $figureAttrLink }}</a>{{ end }}</p>
     {{- end }}

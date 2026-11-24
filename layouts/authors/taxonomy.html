@@ -3,6 +3,7 @@
     <div class="container">
     <div class="columns">
       <div class="column is-10 is-offset-1">
+        <h1 class="title is-2 is-size-3-mobile is-family-secondary">{{ .Title }}</h1>
         {{ range .Data.Pages }}
         {{ partial "author" (dict "Page" . "SourceKind" $.Kind ) }}
         {{ end }}

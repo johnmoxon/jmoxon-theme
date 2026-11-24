@@ -12,14 +12,14 @@
       {{/* If iter is zero then create a new ancestor */}}
 
       <article class="panel has-half-width mb-0">
-        <p class="panel-heading">
+        <h2 class="panel-heading is-size-6">
           {{ if eq $.Type "tags" }}#{{ end }}{{ $value.Name }}
-          <span class="tag is-rounded is-primary has-text-weight-bold is-pulled-right">{{ $value.Count }}</span>
-        </p>
+          <span class="tag is-rounded count-badge has-text-weight-bold is-pulled-right">{{ $value.Count }}<span class="is-sr-only"> articles</span></span>
+        </h2>
         {{ range $item := $value.WeightedPages | first 4 }}
         <a href="{{$item.RelPermalink}}" class="panel-block">
           <span class="panel-icon">
-            <i class="fas fa-book" aria-hidden="true"></i>
+            {{ partial "icon.html" "book" }}
           </span>
           {{ $item.Title }}
         </a>
@@ -28,7 +28,7 @@
         <a href="/{{ $data.Plural }}/{{ $value.Name | urlize }}/"
           class="panel-block">
           <span class="panel-icon">
-            <i class="fas fa-arrow-right" aria-hidden="true"></i>
+            {{ partial "icon.html" "arrow-right" }}
           </span>
           View all
         </a>

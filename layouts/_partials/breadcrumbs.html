@@ -1,9 +1,9 @@
 
-<nav class="breadcrumb is-size-7" aria-label="breadcrumbs">
+<nav class="breadcrumb is-size-7" aria-label="Breadcrumb">
     <ul>
         {{/*  Get the home page  */}}
         {{- range .Ancestors.Reverse |first 1 }}
-        <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+        <li><a href="{{ .RelPermalink }}">{{ if .IsHome }}Home{{ else }}{{ .Title }}{{ end }}</a></li>
         {{- end }}
 
         {{/*  on a term page get taxonomy list page  */}}

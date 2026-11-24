@@ -3,10 +3,10 @@
 {{ $name := . }}
 {{ $path := printf "/%s/%s" "authors" ($name | urlize) }}
 {{ with $.Site.GetPage $path }}
-<div class="media box">
+<aside class="media box author-bio" aria-label="About the author">
     <figure class="media-left">
         <p class="image is-64x64">
-            <img src="{{ .Params.image }}" class="is-rounded">
+            <img src="{{ .Params.image }}" alt="{{ .Params.fullname | default .Title }}" width="64" height="64" class="is-rounded">
         </p>
     </figure>
     <div class="media-content">
@@ -21,12 +21,12 @@
         <nav class="level is-mobile">
             <div class="level-left">
                 <a class="level-item" href="{{ .RelPermalink }}">
-                    More articles&nbsp;
-                    <span class="icon is-small"><i class="fas fa-arrow-right"></i></span>
+                    More articles by {{ .Params.name | default .Title }}&nbsp;
+                    <span class="icon is-small">{{ partial "icon.html" "arrow-right" }}</span>
                 </a>
             </div>
         </nav>
     </div>
-</div>
+</aside>
 {{ end }}
 {{ end }}

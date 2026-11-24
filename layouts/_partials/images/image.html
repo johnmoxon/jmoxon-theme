@@ -37,7 +37,8 @@ Feel free to adjust your CSS/SCSS as desired.
 Variables - Map from parameters
 **************************************/}}
 {{- $src := .src -}} {{/* REQUIRED */}}
-{{- $alt := default "no alt parameter set!" .alt -}}
+{{- /* No alt given means decorative: alt="" so screen readers skip it. */ -}}
+{{- $alt := .alt | default "" -}}
 {{- $holder := default "GIP" .holder -}}
 {{- $hint := default "photo" .hint -}}
 {{- /* ^^ applicable only to webp: https://gohugo.io/content-management/image-processing/#hint */ -}}
@@ -96,10 +97,10 @@ Variables - Map from parameters
           {{- end -}}
         {{- end -}}' sizes="{{ $respSizes }}" />
       <img class="{{ $imgClass }}" src="{{ $actualImg.RelPermalink }}" width="{{ $src.Width }}" height="{{ $src.Height }}"
-        alt="{{ $alt }}" title="{{ $alt }}" loading="lazy" />
+        alt="{{ $alt }}" loading="lazy" decoding="async" />
     </picture>
     {{- with $readingTime }}
-    <span class="tag is-white is-ontop-right">{{ printf "%d mins read" . }}</span>
+    <span class="tag reading-time is-ontop-right">{{ printf "%d min read" . }}</span>
     {{ end -}}
   </div>
 {{ else }}
@@ -108,7 +109,7 @@ Variables - Map from parameters
   {{ $initXDimen := 1000 }}
   {{ $initYDimen := math.Ceil (mul (div $initXDimen $ratioDict.x) $ratioDict.y) }}
   {{ $initDimen := string (printf "%sx%s" (string $initXDimen) (string $initYDimen)) }}
-  <img src="https://placehold.co/{{$initDimen}}?text=no%20img" alt="No image set">
+  <img src="https://placehold.co/{{$initDimen}}?text=no%20img" alt="">
 {{ end }}
 
 

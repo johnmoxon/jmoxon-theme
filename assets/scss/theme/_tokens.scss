@@ -1,6 +1,10 @@
 // Theme colour tokens that sit on top of Bulma's light/dark CSS variables.
 //   --jm-ink    strong text, rules and borders (black in light mode)
 //   --jm-paper  the page colour that sits behind ink
+//   --jm-link   link and accent text. The brand teal (#28c3ab) is only 2.2:1
+//               on white, so light mode uses a deeper teal (5.2:1 on white,
+//               4.8:1 on the tag grey). Dark mode keeps the brand teal (8.3:1).
+//   --jm-focus  keyboard focus ring (at least 3:1 against the page)
 // The selector order mirrors Bulma's themes so the toggle overrides the
 // visitor's system preference.
 
@@ -8,6 +12,10 @@
   --jm-ink: #000;
   --jm-paper: #fff;
   --jm-selection: rgba(40, 195, 171, 0.3);
+  --jm-link: #137a6b;
+  --jm-link-hover: #0c5c50;
+  --jm-focus: #137a6b;
+  --jm-image-dim: none;
   --bulma-text-strong: #000;
 }
 
@@ -15,7 +23,13 @@
   --jm-ink: hsl(0, 0%, 90%);
   --jm-paper: hsl(0, 0%, 9%);
   --jm-selection: rgba(40, 195, 171, 0.45);
+  --jm-link: #28c3ab;
+  --jm-link-hover: #5fd9c6;
+  --jm-focus: #28c3ab;
+  --jm-image-dim: brightness(0.88);
   --bulma-text-strong: hsl(0, 0%, 92%);
+  // Brighter body text than Bulma's dark default (#b5b5b5) for long reading.
+  --bulma-text: hsl(0, 0%, 82%);
 }
 
 :root { @include light; color-scheme: light; }

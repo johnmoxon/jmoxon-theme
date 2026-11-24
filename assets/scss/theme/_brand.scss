@@ -3,13 +3,152 @@
 
 a.is-link,
 .content a {
-  color: var(--bulma-primary);
+  color: var(--jm-link);
 }
 
 a.is-link:hover,
-article .content a:hover {
+.content a:hover {
+  color: var(--jm-link-hover);
+}
+
+// Links inside running text are underlined, so they never rely on colour
+// alone (WCAG 1.4.1). Tags and "read more" links have their own styling.
+.content a:not(.tag):not(.read-more):not(.button) {
   text-decoration: underline;
-  color: var(--bulma-primary);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+
+  &:hover {
+    text-decoration-thickness: 2px;
+  }
+}
+
+.breadcrumb a {
+  color: var(--jm-link);
+}
+
+// One visible focus ring for everything keyboard-focusable.
+:focus-visible {
+  outline: 2px solid var(--jm-focus);
+  outline-offset: 2px;
+}
+
+// Skip link: off screen until it receives keyboard focus.
+.skip-link {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 100;
+  padding: 0.5rem 1rem;
+  background: var(--jm-paper);
+  color: var(--jm-ink);
+  border: 2px solid var(--jm-focus);
+  transform: translateY(-200%);
+
+  &:focus {
+    transform: none;
+  }
+}
+
+main:focus {
+  outline: none;
+}
+
+// Inline SVG icons (see _partials/icon.html) sized like the old icon font.
+.svg-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+}
+
+// Icon-only links and buttons: at least 24 by 24px to hit (WCAG 2.5.8).
+.icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2rem;
+  min-height: 2rem;
+  color: var(--jm-ink);
+
+  &:hover {
+    color: var(--jm-link);
+  }
+}
+
+// Tag chips
+// ".content ul" gives lists discs and an indent, so these lists need the
+// extra specificity of ul.* to switch both off.
+ul.tag-list,
+.content ul.tag-list,
+.share-links ul,
+.footer ul.footer-links {
+  list-style: none;
+  margin-inline-start: 0;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0 !important;
+  padding: 0;
+
+  li {
+    margin: 0 !important;
+  }
+}
+
+
+a.tag {
+  min-height: 1.75rem;
+  background-color: transparent;
+  border: 1px solid var(--bulma-border);
+  color: var(--jm-ink);
+  text-decoration: none;
+
+  &:hover {
+    border-color: var(--jm-link);
+    color: var(--jm-link);
+  }
+}
+
+// "Read the article" links: tall enough to hit comfortably.
+.read-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  min-height: 1.75rem;
+  color: var(--jm-link);
+  font-weight: 600;
+}
+
+// A card whose title link covers the whole card (no nested links).
+.stretched-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.above-stretched-link {
+  position: relative;
+  z-index: 2;
+}
+
+// Share links on an article
+.share-links {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+
+  ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
 }
 
 // Theme-aware replacement for Bulma's fixed .has-text-black
@@ -99,4 +238,125 @@ img::selection {
 
 .animate-fade {
   animation: fadeIn 750ms ease-in-out;
+}
+
+// Respect the visitor's reduced motion setting (WCAG 2.3.3).
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+// Long-form reading column: about 70 characters a line.
+.article-column {
+  max-width: 42rem;
+  margin-inline: auto;
+}
+
+.article-subtitle {
+  margin-top: 0.75rem !important;
+  letter-spacing: 0.06em;
+}
+
+.article-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.article-body {
+  line-height: 1.7;
+}
+
+// Photos are a touch dimmer in dark mode so they don't glare.
+picture img,
+.image img {
+  filter: var(--jm-image-dim);
+}
+
+// Site title and header on phones: less dead space.
+header .site-title {
+  letter-spacing: -0.01em;
+}
+
+.header-ornament {
+  color: var(--bulma-border);
+}
+
+// Footer
+.footer {
+  background-color: transparent;
+  border-top: 1px solid var(--jm-ink);
+  padding-block: 2.5rem 3rem;
+
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.25rem 1.5rem;
+    list-style: none;
+    margin: 0 0 1rem !important;
+    padding: 0;
+
+    li {
+      margin: 0 !important;
+    }
+
+    a {
+      color: var(--jm-ink);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4em;
+      min-height: 1.75rem;
+      text-decoration: none;
+
+      &:hover {
+        color: var(--jm-link);
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .copyright {
+    font-size: var(--bulma-size-7);
+  }
+}
+
+// Article page: room between the tag list and the author box.
+#main_article > .tag-list {
+  margin-bottom: 2.5rem !important;
+}
+
+// Count badges and the reading time pill follow the theme.
+.tag.count-badge,
+.tag.reading-time {
+  background-color: var(--jm-ink);
+  color: var(--jm-paper);
+}
+
+.featured-post .card {
+  position: relative;
+}
+
+.featured-post .padded-multiline a {
+  color: inherit;
+}
+
+// On phones columns stack, so the negative gutter margin only pushes the page
+// sideways (the 2.2rem column gap is wider than the section padding).
+@media (max-width: 768px) {
+  .columns:not(.is-mobile) {
+    margin-inline: 0;
+
+    > .column {
+      padding-inline: 0;
+    }
+  }
 }
